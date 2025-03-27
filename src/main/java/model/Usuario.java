@@ -1,21 +1,17 @@
 package model;
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement (name="usuario")
+@XmlSeeAlso({Creador.class, Voluntario.class})
 public abstract class Usuario {
     private String nombre;
     private String usuario;
     private String password;
     private String email;
 
-    /*
-    TIENES QUE INCLUIR LOS COMENTARIOS DE TODOS LOS METODOS QUE HAGAS, ADEMÁS AÑADIR EL TOSTRING
-    PARA HACER COMPROBACIONES AUNQUE LUEGO NO TENGA USO REAL. LOS TOSTRING YA LOS HE HECHO YO Y
-    TAMBIEN TE HE MODIFICADO EL VALIDA EMAIL PORQUE SE VALIDARIA DE OTRA FORMA NO CON UN MÉTODO
-    ESPECIFICO PARA ELLO EN ESTA CLASE.
-     */
-    //Constructores
-    public Usuario(){
 
-    }
+
+    public Usuario(){}
 
     public Usuario(String nombre, String usuario, String password, String email) {
         this.nombre = nombre;
@@ -24,7 +20,7 @@ public abstract class Usuario {
         this.email = email;
     }
 
-    //Getters y setters
+    @XmlElement (name = "nombre")
     public String getNombre() {
         return nombre;
     }
@@ -33,6 +29,7 @@ public abstract class Usuario {
         this.nombre = nombre;
     }
 
+    @XmlElement (name = "nombreUsuario")
     public String getUsuario() {
         return usuario;
     }
@@ -41,6 +38,7 @@ public abstract class Usuario {
         this.usuario = usuario;
     }
 
+    @XmlElement (name = "contraseña")
     public String getPassword() {
         return password;
     }
@@ -49,6 +47,7 @@ public abstract class Usuario {
         this.password = password;
     }
 
+    @XmlElement (name = "email")
     public String getEmail() {
         return email;
     }

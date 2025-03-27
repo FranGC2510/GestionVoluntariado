@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Usuarios>
+    <voluntario>
+        <email>hola@gmail.es</email>
+        <nombre>Paco</nombre>
+        <contraseña>1234</contraseña>
+        <nombreUsuario>paquillo</nombreUsuario>
+        <puntosTotales>0</puntosTotales>
+    </voluntario>
+    <creador>
+        <email>ghdjd@jh.com</email>
+        <nombre>Miguel</nombre>
+        <contraseña>1234</contraseña>
+        <nombreUsuario>miguelillo</nombreUsuario>
+        <ONG>PepeCalvo</ONG>
+    </creador>
+</Usuarios>

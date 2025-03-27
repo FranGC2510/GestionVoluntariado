@@ -1,23 +1,21 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement (name = "voluntario")
 public class Voluntario extends Usuario{
-    private int puntos = 0;
-    /*
-    TIENES QUE INCLUIR LOS COMENTARIOS DE TODOS LOS METODOS QUE HAGAS, ADEMÁS AÑADIR EL TOSTRING
-    PARA HACER COMPROBACIONES AUNQUE LUEGO NO TENGA USO REAL.
-     */
+    private int puntos;
 
-    //Constructores
-    public Voluntario(int puntos) {
-        this.puntos = puntos;
+    public Voluntario() {
     }
 
-    public Voluntario(String nombre, String usuario, String password, String email, int puntos) {
+    public Voluntario(String nombre, String usuario, String password, String email) {
         super(nombre, usuario, password, email);
-        this.puntos = puntos;
+        this.puntos = 0;
     }
 
-    //Getters y setters
+    @XmlElement (name = "puntosTotales")
     public int getPuntos() {
         return puntos;
     }

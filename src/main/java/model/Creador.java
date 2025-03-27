@@ -1,14 +1,13 @@
 package model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement (name = "creador")
 public class Creador extends Usuario{
     private String ONG;
-    /*
-    TIENES QUE INCLUIR LOS COMENTARIOS DE TODOS LOS METODOS QUE HAGAS, ADEMÁS AÑADIR EL TOSTRING
-    PARA HACER COMPROBACIONES AUNQUE LUEGO NO TENGA USO REAL.
-     */
-    //Constructores
-    public Creador(String ONG) {
-        this.ONG = ONG;
+
+    public Creador(){
     }
 
     public Creador(String nombre, String usuario, String password, String email, String ONG) {
@@ -16,7 +15,7 @@ public class Creador extends Usuario{
         this.ONG = ONG;
     }
 
-    //Getters y setters
+    @XmlElement (name = "ONG")
     public String getONG() {
         return ONG;
     }
