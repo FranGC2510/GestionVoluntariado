@@ -6,7 +6,18 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+/**
+ * Clase que proporciona métodos genéricos para la serialización y deserialización de objetos en formato XML
+ * utilizando JAXB.
+ */
 public class XMLManager {
+    /**
+     * Guarda un objeto en un archivo XML.
+     * @param objeto   El objeto que se desea guardar en formato XML.
+     * @param fileName El nombre del archivo XML donde se guardará el objeto.
+     * @param <T>      Tipo genérico que representa el objeto a serializar.
+     * @return true si el proceso de guardado fue exitoso, false en caso contrario.
+     */
     public static <T> boolean writeXML(T objeto, String fileName) {
         boolean result = false;
         try {
@@ -27,6 +38,13 @@ public class XMLManager {
         return result;
     }
 
+    /**
+     * Lee un archivo XML y lo convierte en un objeto Java.
+     * @param objeto   Una instancia del tipo de objeto esperado (se usa para obtener la clase).
+     * @param fileName El nombre del archivo XML desde donde se cargará el objeto.
+     * @param <T>      Tipo genérico que representa el objeto a deserializar.
+     * @return El objeto deserializado desde el XML, o null si hubo un error.
+     */
     public static <T> T readXML(T objeto, String fileName) {
         T result = null;
         try {
