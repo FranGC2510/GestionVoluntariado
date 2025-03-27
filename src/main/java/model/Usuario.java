@@ -1,4 +1,9 @@
 package model;
+import exceptions.EmailInvalidoException;
+import exceptions.PasswordInvalidaException;
+import utils.PasswordUtilidades;
+import utils.UtilidadesGenerales;
+
 import javax.xml.bind.annotation.*;
 
 /**
@@ -81,7 +86,10 @@ public abstract class Usuario {
      * Establece la contraseña del usuario.
      * @param password Contraseña del usuario.
      */
-    public void setPassword(String password) {
+    public void setPassword(String password) throws PasswordInvalidaException {
+        if(!PasswordUtilidades.validaPassword(password)){
+            throw new PasswordInvalidaException("Contraseña invalida, no cumple con el formato");
+        }
         this.password = password;
     }
 
@@ -95,8 +103,10 @@ public abstract class Usuario {
     }
 
     //Terminar de comentar cuando se haga la validación
-    public void setEmail(String email) {
-        //Aqui se valida el email con un metodo estatico en utilidades donde iria la expresion regular.
+    public void setEmail(String email) throws EmailInvalidoException {
+        if(!UtilidadesGenerales.validaEmail(email)){
+            throw new EmailInvalidoException("Formato incorrecto del email.");
+        }
         this.email = email;
     }
 

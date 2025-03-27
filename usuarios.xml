@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Usuarios>
     <creador>
-        <email>fran@gmail.com</email>
-        <nombre>Fran Garcia</nombre>
+        <email>ghdjd@jh.com</email>
+        <nombre>Miguel</nombre>
         <contraseña>1234</contraseña>
-        <nombreUsuario>fran1234</nombreUsuario>
-        <ONG>ONG</ONG>
+        <nombreUsuario>miguelillo</nombreUsuario>
+        <ONG>PepeCalvo</ONG>
     </creador>
     <voluntario>
         <email>hola@gmail.es</email>
@@ -14,11 +14,11 @@
         <nombreUsuario>paquillo</nombreUsuario>
         <puntosTotales>0</puntosTotales>
     </voluntario>
-    <creador>
-        <email>ghdjd@jh.com</email>
-        <nombre>Miguel</nombre>
-        <contraseña>1234</contraseña>
-        <nombreUsuario>miguelillo</nombreUsuario>
-        <ONG>PepeCalvo</ONG>
-    </creador>
+    <voluntario>
+        <email>pepe@gmail.es</email>
+        <nombre>Pepe López</nombre>
+        <contraseña>$2a$10$cRsJmdnjc9DwfcHHL6Gjqu0mq5fpmc39XmtjGsQiS/NLz3qIzAJW2</contraseña>
+        <nombreUsuario>pepe123</nombreUsuario>
+        <puntosTotales>0</puntosTotales>
+    </voluntario>
 </Usuarios>

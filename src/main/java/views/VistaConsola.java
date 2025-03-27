@@ -1,8 +1,11 @@
 package views;
 
+import exceptions.EmailInvalidoException;
+import exceptions.PasswordInvalidaException;
 import model.Creador;
 import model.Usuario;
 import model.Voluntario;
+import utils.PasswordUtilidades;
 import utils.UtilidadesGenerales;
 
 import java.util.Scanner;
@@ -65,12 +68,10 @@ public class VistaConsola {
 
         System.out.print("Introduzca nombre y apellido: ");
         String nombre = sc.nextLine();
-        System.out.print("Introduzca email: ");
-        String email = sc.nextLine();
+        String email = pideEmail();
         System.out.println("Introduzca nombre de usuario: ");
         String usuario = sc.nextLine();
-        System.out.print("Introduzca contraseña: ");
-        String password = sc.nextLine();
+        String password = pidePassword();
         do{
             System.out.println("Vuelva a introducir la misma contraseña: ");
             String contrasena = sc.nextLine();
@@ -81,14 +82,16 @@ public class VistaConsola {
             }
         }while (!flag);
 
+        String hashPassword = PasswordUtilidades.hashPassword(password);
+
         switch(tipo){
             case 1:
                 System.out.println("Introduzca su ONG afiliada: ");
                 String ONG = sc.nextLine();
-                nuevoUsuario=new Creador(nombre,usuario,password,email,ONG);
+                nuevoUsuario=new Creador(nombre,usuario,hashPassword,email,ONG);
                 break;
             case 2:
-                nuevoUsuario=new Voluntario(nombre,usuario,password,email);
+                nuevoUsuario=new Voluntario(nombre,usuario,hashPassword,email);
                 break;
             case 3:
 
@@ -112,5 +115,44 @@ public class VistaConsola {
 
         opcion=UtilidadesGenerales.pideEntero(menuRegistrar,1,3);
         return opcion;
+    }
+
+    public static String pideEmail(){
+        String email="";
+        boolean flag=false;
+
+        do{
+            System.out.print("Introduzca el email: ");
+            email = sc.nextLine();
+            try{
+                if(!UtilidadesGenerales.validaEmail(email)){
+                    throw new EmailInvalidoException("Debe introducir el email correctamente.");
+                }
+                flag=true;
+            }catch(EmailInvalidoException e){
+                System.out.println(e.getMessage());
+            }
+        }while(!flag);
+        return email;
+    }
+
+    public static String pidePassword(){
+        String password="";
+        boolean flag=false;
+
+        do{
+            System.out.print("Introduzca contraseña: ");
+            password = sc.nextLine();
+            try{
+                if(!PasswordUtilidades.validaPassword(password)){
+                    throw new PasswordInvalidaException("La contraseña debe tener al menos 8 caracteres, de los cuales" +
+                            "al menos una mayuscula, una minuscula y un número.");
+                }
+                flag=true;
+            }catch(PasswordInvalidaException e){
+                System.out.println(e.getMessage());
+            }
+        }while(!flag);
+        return password;
     }
 }
