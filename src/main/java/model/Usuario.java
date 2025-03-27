@@ -102,7 +102,15 @@ public abstract class Usuario {
         return email;
     }
 
-    //Terminar de comentar cuando se haga la validación
+    /**
+     * Establece el correo electrónico del usuario después de validar que tiene un formato correcto.
+     *
+     * Este método verifica si el correo electrónico proporcionado cumple con un formato válido utilizando
+     * la función {@link UtilidadesGenerales#validaEmail(String)}. Si el formato es incorrecto, se lanza una excepción {@link EmailInvalidoException}.
+     *
+     * @param email El correo electrónico que se desea establecer.
+     * @throws EmailInvalidoException Si el formato del correo electrónico no es válido.
+     */
     public void setEmail(String email) throws EmailInvalidoException {
         if(!UtilidadesGenerales.validaEmail(email)){
             throw new EmailInvalidoException("Formato incorrecto del email.");

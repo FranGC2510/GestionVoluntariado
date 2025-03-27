@@ -57,7 +57,16 @@ public class UtilidadesGenerales {
         }
         return flag;
     }
-
+    /**
+     * Valida si una dirección de correo electrónico es válida utilizando una expresión regular.
+     *
+     * Este método verifica que el correo electrónico proporcionado cumpla con un formato estándar
+     * de dirección de correo, asegurándose de que contenga caracteres alfanuméricos, seguido de un "@"
+     * y un dominio, con un sufijo de dominio válido (por ejemplo, ".com", ".org", etc.).
+     *
+     * @param email La dirección de correo electrónico a validar.
+     * @return true si el correo electrónico tiene un formato válido, false en caso contrario.
+     */
     public static boolean validaEmail(String email){
         return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }

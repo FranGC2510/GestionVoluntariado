@@ -20,6 +20,13 @@ public class VistaConsola {
         System.out.println(msn);
     }
 
+    /**
+     * Muestra la pantalla de bienvenida y permite al usuario seleccionar una opción.
+     * @return La opción seleccionada por el usuario.
+     *         1 - Iniciar sesión.
+     *         2 - Registrarse.
+     *         0 - Salir.
+     */
     public static int bienvenida() {
         int opcion=-1;
         String asciiArt = """
@@ -62,6 +69,12 @@ public class VistaConsola {
         return opcion;
     }
 
+    /**
+     * Registra un nuevo usuario, solicitando su nombre, correo electrónico, nombre de usuario y contraseña.
+     * @param tipo El tipo de usuario que se desea registrar:
+     *             1 - Creador, 2 - Voluntario.
+     * @return Un objeto {@link Usuario} del tipo especificado (Creador o Voluntario).
+     */
     public static Usuario registro(int tipo){
         Usuario nuevoUsuario=null;
         boolean flag=false;
@@ -100,6 +113,13 @@ public class VistaConsola {
         return nuevoUsuario;
     }
 
+    /**
+     * Muestra las opciones de registro disponibles para el usuario y devuelve la opción seleccionada.
+     * @return La opción seleccionada por el usuario para el tipo de registro:
+     *         1 - Registrarse como creador.
+     *         2 - Registrarse como voluntario.
+     *         3 - Registrarse como ambos.
+     */
     public static int tipoRegistro() {
         int opcion=0;
         String menuRegistrar="""
@@ -116,7 +136,11 @@ public class VistaConsola {
         opcion=UtilidadesGenerales.pideEntero(menuRegistrar,1,3);
         return opcion;
     }
-
+    /**
+     * Solicita al usuario que introduzca un correo electrónico válido.
+     * @return El correo electrónico introducido por el usuario.
+     * @throws EmailInvalidoException Si el correo electrónico no es válido según el formato establecido.
+     */
     public static String pideEmail(){
         String email="";
         boolean flag=false;
@@ -135,7 +159,11 @@ public class VistaConsola {
         }while(!flag);
         return email;
     }
-
+    /**
+     * Solicita al usuario que introduzca una contraseña válida.
+     * @return La contraseña introducida por el usuario.
+     * @throws PasswordInvalidaException Si la contraseña no cumple con los requisitos de seguridad.
+     */
     public static String pidePassword(){
         String password="";
         boolean flag=false;
@@ -145,7 +173,7 @@ public class VistaConsola {
             password = sc.nextLine();
             try{
                 if(!PasswordUtilidades.validaPassword(password)){
-                    throw new PasswordInvalidaException("La contraseña debe tener al menos 8 caracteres, de los cuales" +
+                    throw new PasswordInvalidaException("La contraseña debe tener al menos 8 caracteres, de los cuales " +
                             "al menos una mayuscula, una minuscula y un número.");
                 }
                 flag=true;
