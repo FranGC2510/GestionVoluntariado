@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Usuarios>
+    <creador>
+        <email>fran@gmail.com</email>
+        <nombre>Fran Garcia</nombre>
+        <contraseña>1234</contraseña>
+        <nombreUsuario>fran1234</nombreUsuario>
+        <ONG>ONG</ONG>
+    </creador>
     <voluntario>
         <email>hola@gmail.es</email>
         <nombre>Paco</nombre>
