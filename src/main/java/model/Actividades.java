@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.Estado;
+
 import java.util.Date;
 
 /**
@@ -11,7 +13,7 @@ public class Actividades {
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
-    private String estado;
+    private Estado estado;
     private String comentario;
 
     /**
@@ -20,10 +22,10 @@ public class Actividades {
      * @param descripcion La descripción de la actividad.
      * @param fechaInicio La fecha de inicio de la actividad.
      * @param fechaFin La fecha de finalización de la actividad.
-     * @param estado El estado actual de la actividad (por ejemplo, "En curso", "Finalizada").
+     * @param estado El estado actual de la actividad.
      * @param comentario Comentarios adicionales sobre la actividad.
      */
-    public Actividades(String nombre, String descripcion, Date fechaInicio, Date fechaFin, String estado, String comentario) {
+    public Actividades(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Estado estado, String comentario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
@@ -100,15 +102,15 @@ public class Actividades {
      * Obtiene el estado actual de la actividad.
      * @return El estado de la actividad.
      */
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
     /**
      * Establece el estado actual de la actividad.
-     * @param estado El nuevo estado de la actividad (por ejemplo, "Pendiente", "En curso").
+     * @param estado El nuevo estado de la actividad.
      */
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -140,7 +142,8 @@ public class Actividades {
                 "\n\tdescripcion='" + descripcion +
                 "\n\tfechaInicio=" + fechaInicio +
                 "\n\tfechaFin=" + fechaFin +
-                "\n\testado='" + estado +
+                "\n\testado=" + estado +
                 "\n\tcomentario='" + comentario;
     }
+
 }
