@@ -1,8 +1,10 @@
-package model;
+package Controller;
 
 import interfaces.Gestionable;
 import exceptions.IniciativaNotFoundException;
 import exceptions.IniciativaAlreadyExistsException;
+import model.Iniciativa;
+
 import java.util.ArrayList;
 import java.util.List;
 
