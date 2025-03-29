@@ -82,11 +82,10 @@ public class VistaConsola {
         System.out.print("Introduzca nombre y apellido: ");
         String nombre = sc.nextLine();
         String email = pideEmail();
-        System.out.println("Introduzca nombre de usuario: ");
-        String usuario = sc.nextLine();
+        String usuario = pideUsuario();
         String password = pidePassword();
         do{
-            System.out.println("Vuelva a introducir la misma contraseña: ");
+            System.out.print("Vuelva a introducir la misma contraseña: ");
             String contrasena = sc.nextLine();
             if(contrasena.equals(password)){
                 flag=true;
@@ -99,15 +98,13 @@ public class VistaConsola {
 
         switch(tipo){
             case 1:
-                System.out.println("Introduzca su ONG afiliada: ");
+                System.out.print("Introduzca su ONG afiliada: ");
                 String ONG = sc.nextLine();
                 nuevoUsuario=new Creador(nombre,usuario,hashPassword,email,ONG);
                 break;
             case 2:
                 nuevoUsuario=new Voluntario(nombre,usuario,hashPassword,email);
                 break;
-            case 3:
-
         }
 
         return nuevoUsuario;
@@ -118,7 +115,6 @@ public class VistaConsola {
      * @return La opción seleccionada por el usuario para el tipo de registro:
      *         1 - Registrarse como creador.
      *         2 - Registrarse como voluntario.
-     *         3 - Registrarse como ambos.
      */
     public static int tipoRegistro() {
         int opcion=0;
@@ -129,11 +125,10 @@ public class VistaConsola {
                 
                           1. Registrarse como creador
                           2. Registrarse como voluntario
-                          3. Registrarse como ambos
                 ---------------------------------------------------
                 """;
 
-        opcion=UtilidadesGenerales.pideEntero(menuRegistrar,1,3);
+        opcion=UtilidadesGenerales.pideEntero(menuRegistrar,1,2);
         return opcion;
     }
     /**
@@ -182,5 +177,34 @@ public class VistaConsola {
             }
         }while(!flag);
         return password;
+    }
+
+    public static String pideUsuario(){
+        String usuario="";
+        System.out.print("Introduzca nombre de usuario: ");
+        usuario = sc.nextLine();
+        return usuario;
+    }
+
+    public static int menuCreador(){
+        int opcion=0;
+        String diseyoAscii="""
+                ===================================================
+                         BIENVENIDO, CREADOR DE INICIATIVAS
+                ===================================================
+
+                         ¡Gracias por contribuir con nuevas
+                        oportunidades para la comunidad!
+
+                ---------------------------------------------------
+                  1. Crear una nueva iniciativa
+                  2. Ver todas mis iniciativas
+                  3. Editar mis iniciativas
+                  4. Cerrar sesión
+                ---------------------------------------------------
+                """;
+        System.out.println(diseyoAscii);
+
+        return UtilidadesGenerales.pideEntero("Elija una opción: ",1,4);
     }
 }

@@ -8,6 +8,7 @@ import views.VistaConsola;
 
 public class TestXML {
     public static void main(String[] args) {
+        /*
         Usuario usuario1=new Creador("Miguel","miguelillo","1234","ghdjd@jh.com","PepeCalvo");
         Usuario usuario2=new Voluntario("Paco", "paquillo", "1234", "hola@gmail.es");
 
@@ -24,11 +25,20 @@ public class TestXML {
             System.out.println(listaUsuarios2);
         }
          */
-        UsuarioController controlador=new UsuarioController(listaUsuarios);
+        UsuarioController controlador=new UsuarioController();
         int opcion;
         do{
             opcion= VistaConsola.bienvenida();
             switch (opcion){
+                case 1:
+                    if(controlador.iniciarSesion()){
+                        System.out.println("Iniciando sesion...\n");
+                        VistaConsola.menuCreador();
+                    }else{
+                        System.out.println("Sus credenciales no coinciden con ningunas de nuestra base de datos. " +
+                                "Por favor ingrese de nuevo sus datos o registrese.\n");
+                    }
+                    break;
                 case 2:
                     if(controlador.addUsuario()){
                         System.out.println("Usuario agregado");
@@ -37,7 +47,7 @@ public class TestXML {
                     }
                     break;
             }
-        }while(opcion==0);
+        }while(opcion!=0);
 
     }
 }

@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Clase que proporciona métodos genéricos para la serialización y deserialización de objetos en formato XML
@@ -47,6 +48,16 @@ public class XMLManager {
      */
     public static <T> T readXML(T objeto, String fileName) {
         T result = null;
+        if(!existeXML(fileName)) {
+            File file = new File(fileName);
+            try{
+                file.createNewFile();
+                writeXML(objeto, fileName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         try {
             //Paso 1: Crear el contexto de JaxB para la clase que queremos serializar
             JAXBContext context = JAXBContext.newInstance(objeto.getClass());
@@ -60,6 +71,15 @@ public class XMLManager {
             throw new RuntimeException(e);
         }
 
+        return result;
+    }
+
+    private static boolean existeXML(String fileName) {
+        boolean result = false;
+        File file = new File(fileName);
+        if(file.exists()) {
+            result = true;
+        }
         return result;
     }
 }

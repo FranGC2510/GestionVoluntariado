@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Usuarios>
-    <creador>
-        <email>ghdjd@jh.com</email>
-        <nombre>Miguel</nombre>
-        <contraseña>1234</contraseña>
-        <nombreUsuario>miguelillo</nombreUsuario>
-        <ONG>PepeCalvo</ONG>
-    </creador>
     <voluntario>
-        <email>hola@gmail.es</email>
-        <nombre>Paco</nombre>
-        <contraseña>1234</contraseña>
-        <nombreUsuario>paquillo</nombreUsuario>
-        <puntosTotales>0</puntosTotales>
-    </voluntario>
-    <voluntario>
-        <email>pepe@gmail.es</email>
-        <nombre>Pepe López</nombre>
-        <contraseña>$2a$10$cRsJmdnjc9DwfcHHL6Gjqu0mq5fpmc39XmtjGsQiS/NLz3qIzAJW2</contraseña>
-        <nombreUsuario>pepe123</nombreUsuario>
+        <email>fran@gmail.com</email>
+        <nombre>Fran Garcia</nombre>
+        <password>$2a$10$dlJOCA3iPuGPgo6A7pLttOsc4GIuUW4784ZkI5fcV7..8D86FXwc6</password>
+        <nombreUsuario>fran</nombreUsuario>
         <puntosTotales>0</puntosTotales>
     </voluntario>
 </Usuarios>

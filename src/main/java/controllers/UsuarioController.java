@@ -1,20 +1,21 @@
 package controllers;
 
 import dataAccess.XMLManager;
-import model.Creador;
 import model.Usuario;
 import model.UsuariosLista;
-import model.Voluntario;
+import utils.PasswordUtilidades;
 import views.VistaConsola;
 
 public class UsuarioController {
     private UsuariosLista usuarios;
     /**
      * Constructor del controlador de usuarios.
-     * @param usuarios La lista de usuarios que se gestionará mediante este controlador.
      */
-    public UsuarioController(UsuariosLista usuarios) {
-        this.usuarios = usuarios;
+    public UsuarioController() {
+        this.usuarios = XMLManager.readXML(new UsuariosLista(),"usuarios.xml");
+        if(usuarios == null){
+            usuarios = new UsuariosLista();
+        }
     }
     /*
     /**
@@ -43,9 +44,25 @@ public class UsuarioController {
     public boolean addUsuario() {
         boolean resultado = false;
         Usuario nuevoUsuario= VistaConsola.registro(VistaConsola.tipoRegistro());
-        if(usuarios.addUsuario(nuevoUsuario)){
+        if(nuevoUsuario!=null && usuarios.addUsuario(nuevoUsuario)){
             XMLManager.writeXML(usuarios,"usuarios.xml");
             resultado = true;
+        }
+        return resultado;
+    }
+
+    public boolean iniciarSesion(){
+        boolean resultado = false;
+        SesionUsuario sesion=SesionUsuario.getInstance();
+        String usuario=VistaConsola.pideUsuario();
+        String password=VistaConsola.pidePassword();
+
+        for(Usuario u: usuarios.getUsuarios()){
+            if(u.getUsuario()!=null && u.getPassword()!=null && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
+                sesion.iniciarSesion(u);
+                resultado = true;
+                break;
+            }
         }
         return resultado;
     }

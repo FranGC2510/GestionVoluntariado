@@ -77,7 +77,7 @@ public abstract class Usuario {
      * Obtiene la contraseña del usuario.
      * @return Contraseña del usuario.
      */
-    @XmlElement (name = "contraseña")
+    @XmlElement (name = "password")
     public String getPassword() {
         return password;
     }
@@ -86,10 +86,7 @@ public abstract class Usuario {
      * Establece la contraseña del usuario.
      * @param password Contraseña del usuario.
      */
-    public void setPassword(String password) throws PasswordInvalidaException {
-        if(!PasswordUtilidades.validaPassword(password)){
-            throw new PasswordInvalidaException("Contraseña invalida, no cumple con el formato");
-        }
+    public void setPassword(String password) {
         this.password = password;
     }
 
