@@ -1,4 +1,4 @@
-package Controller;
+package controllers;
 
 import interfaces.Gestionable;
 import exceptions.IniciativaNotFoundException;
