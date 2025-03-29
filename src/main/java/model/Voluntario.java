@@ -27,7 +27,7 @@ public class Voluntario extends Usuario{
      */
     public Voluntario(String nombre, String usuario, String password, String email) {
         super(nombre, usuario, password, email);
-        this.puntos = 0;
+        this.puntos = puntos;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Voluntario extends Usuario{
     @Override
     public String toString() {
         return super.toString() +
-                "\n\tRol-> " + getClass() +
-                "\n\tPuntos-> " + this.puntos;
+                "\n\tRol -> " + getClass().getSimpleName() +
+                "\n\tPuntos -> " + this.puntos;
     }
 }

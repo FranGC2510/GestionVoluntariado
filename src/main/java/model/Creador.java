@@ -54,7 +54,7 @@ public class Creador extends Usuario{
     @Override
     public String toString() {
         return super.toString() +
-                "\n\tRol-> " + getClass() +
-                "\n\tONG-> " + this.ONG;
+                "\n\tRol -> " + getClass().getSimpleName() +
+                "\n\tONG -> " + this.ONG;
     }
 }
