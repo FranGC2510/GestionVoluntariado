@@ -1,28 +1,28 @@
 package model;
 
-import java.util.List;
+import java.util.HashSet;
 
 /**
  * Representa una iniciativa con un identificador único, nombre, descripción,
  * un creador y una lista de voluntarios asociados.
  */
 public class Iniciativa {
+    private static int contadorID=1;
     private int id;
     private String nombre;
     private String descripcion;
     private Creador creador;
-    private List<Voluntario> voluntarios;
+    private HashSet<Voluntario> voluntarios;
 
     /**
      * Constructor que inicializa una nueva iniciativa con todos sus atributos.
-     * @param id El identificador único de la iniciativa.
      * @param nombre El nombre de la iniciativa.
      * @param descripcion La descripción detallada de la iniciativa.
      * @param creador El creador responsable de la iniciativa.
      * @param voluntarios La lista de voluntarios que participan en la iniciativa.
      */
-    public Iniciativa(int id, String nombre, String descripcion, Creador creador, List<Voluntario> voluntarios) {
-        this.id = id;
+    public Iniciativa(String nombre, String descripcion, Creador creador, HashSet<Voluntario> voluntarios) {
+        this.id = contadorID++;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.creador = creador;
@@ -35,14 +35,6 @@ public class Iniciativa {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Establece el identificador único de la iniciativa.
-     * @param id El nuevo ID de la iniciativa.
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -97,7 +89,7 @@ public class Iniciativa {
      * Obtiene la lista de voluntarios que participan en la iniciativa.
      * @return La lista de voluntarios.
      */
-    public List<Voluntario> getVoluntarios() {
+    public HashSet<Voluntario> getVoluntarios() {
         return voluntarios;
     }
 
@@ -105,7 +97,7 @@ public class Iniciativa {
      * Establece la lista de voluntarios de la iniciativa.
      * @param voluntarios La nueva lista de voluntarios.
      */
-    public void setVoluntarios(List<Voluntario> voluntarios) {
+    public void setVoluntarios(HashSet<Voluntario> voluntarios) {
         this.voluntarios = voluntarios;
     }
 
@@ -116,11 +108,19 @@ public class Iniciativa {
      */
     @Override
     public String toString() {
-        return "Iniciativa: " +
-                "\n\tid=" + id +
-                "\n\tnombre='" + nombre +
-                "\n\tdescripcion='" + descripcion +
-                "\n\tcreador=" + creador +
-                "\n\tvoluntarios=" + voluntarios;
+        String resultado="Iniciativa: " +
+                "\n\tCodigo ID= " + id +
+                "\n\tNombre= " + nombre +
+                "\n\tDescripcion= " + descripcion +
+                "\n\tCreador= " + creador +
+                "\n\tVoluntarios= ";
+        if(voluntarios.isEmpty()){
+            resultado+="No hay voluntarios";
+        }else{
+            for(Voluntario voluntario:voluntarios){
+                resultado+="\n\t\t- " + voluntario.getNombre();
+            }
+        }
+        return resultado;
     }
 }

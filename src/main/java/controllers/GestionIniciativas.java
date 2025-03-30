@@ -1,8 +1,8 @@
 package controllers;
 
 import interfaces.Gestionable;
-import exceptions.IniciativaNotFoundException;
-import exceptions.IniciativaAlreadyExistsException;
+import exceptions.IniciativaNoEncontradaException;
+import exceptions.IniciativaExisteException;
 import model.Iniciativa;
 
 import java.util.ArrayList;
@@ -17,23 +17,26 @@ public class GestionIniciativas implements Gestionable<Iniciativa> {
     /**
      * Crea una nueva iniciativa si no existe otra con el mismo ID.
      * @param iniciativa La iniciativa a crear.
-     * @throws IniciativaAlreadyExistsException Si ya existe una iniciativa con el mismo ID.
+     * @throws IniciativaExisteException Si ya existe una iniciativa con el mismo ID.
      */
     @Override
-    public void crear(Iniciativa iniciativa) {
+    public boolean crear(Iniciativa iniciativa) {
+        boolean existe = true;
         for (Iniciativa ini : iniciativas) {
             if (ini.getId() == iniciativa.getId()) {
-                throw new IniciativaAlreadyExistsException("Iniciativa con ID " + iniciativa.getId() + " ya existe.");
+                existe = false;
+                throw new IniciativaExisteException("Iniciativa con ID " + iniciativa.getId() + " ya existe.");
             }
         }
         iniciativas.add(iniciativa);
+        return existe;
     }
 
     /**
      * Lee y retorna una iniciativa por su ID.
      * @param id El ID de la iniciativa a leer.
      * @return La iniciativa encontrada.
-     * @throws IniciativaNotFoundException Si no se encuentra una iniciativa con el ID especificado.
+     * @throws IniciativaNoEncontradaException Si no se encuentra una iniciativa con el ID especificado.
      */
     @Override
     public Iniciativa leer(int id) {
@@ -42,36 +45,42 @@ public class GestionIniciativas implements Gestionable<Iniciativa> {
                 return iniciativa;
             }
         }
-        throw new IniciativaNotFoundException("Iniciativa con ID " + id + " no ha sido encontrada.");
+        throw new IniciativaNoEncontradaException("Iniciativa con ID " + id + " no ha sido encontrada.");
     }
 
     /**
      * Actualiza una iniciativa existente.
      * @param iniciativa La iniciativa con los datos actualizados.
-     * @throws IniciativaNotFoundException Si no se encuentra una iniciativa con el ID especificado.
+     * @throws IniciativaNoEncontradaException Si no se encuentra una iniciativa con el ID especificado.
      */
     @Override
-    public void actualizar(Iniciativa iniciativa) {
+    public boolean actualizar(Iniciativa iniciativa) {
+        boolean flag = false;
         for (int i = 0; i < iniciativas.size(); i++) {
             if (iniciativas.get(i).getId() == iniciativa.getId()) {
                 iniciativas.set(i, iniciativa);
-                return;
+                flag = true;
+                break;
             }
         }
-        throw new IniciativaNotFoundException("Iniciativa con ID " + iniciativa.getId() + " no ha sido encontrada.");
+        if (!flag) {
+            throw new IniciativaNoEncontradaException("Iniciativa con ID " + iniciativa.getId() + " no ha sido encontrada.");
+        }
+        return flag;
     }
 
     /**
      * Elimina una iniciativa por su ID.
      * @param id El ID de la iniciativa a eliminar.
-     * @throws IniciativaNotFoundException Si no se encuentra una iniciativa con el ID especificado.
+     * @throws IniciativaNoEncontradaException Si no se encuentra una iniciativa con el ID especificado.
      */
     @Override
-    public void eliminar(int id) {
-        boolean removed = iniciativas.removeIf(iniciativa -> iniciativa.getId() == id);
-        if (!removed) {
-            throw new IniciativaNotFoundException("Iniciativa con ID " + id + " no ha sido encontrada.");
+    public boolean eliminar(int id) {
+        boolean eliminar = iniciativas.removeIf(iniciativa -> iniciativa.getId() == id);
+        if (!eliminar) {
+            throw new IniciativaNoEncontradaException("Iniciativa con ID " + id + " no ha sido encontrada.");
         }
+        return eliminar;
     }
 
     /**

@@ -1,18 +1,20 @@
 package model;
 
+import exceptions.FechaNoValidaException;
 import interfaces.Estado;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Representa una actividad con información detallada sobre su nombre,
  * descripción, fechas de inicio y fin, estado actual y comentarios adicionales.
  */
-public class Actividades {
+public class Actividad {
     private String nombre;
     private String descripcion;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private Estado estado;
     private String comentario;
 
@@ -25,11 +27,11 @@ public class Actividades {
      * @param estado El estado actual de la actividad.
      * @param comentario Comentarios adicionales sobre la actividad.
      */
-    public Actividades(String nombre, String descripcion, Date fechaInicio, Date fechaFin, Estado estado, String comentario) {
+    public Actividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Estado estado, String comentario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        setFechaFin(fechaFin); // Se valida en el setter
         this.estado = estado;
         this.comentario = comentario;
     }
@@ -70,7 +72,7 @@ public class Actividades {
      * Obtiene la fecha de inicio de la actividad.
      * @return La fecha de inicio.
      */
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
@@ -78,7 +80,8 @@ public class Actividades {
      * Establece la fecha de inicio de la actividad.
      * @param fechaInicio La nueva fecha de inicio.
      */
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
+
         this.fechaInicio = fechaInicio;
     }
 
@@ -86,15 +89,20 @@ public class Actividades {
      * Obtiene la fecha de finalización de la actividad.
      * @return La fecha de finalización.
      */
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
     /**
-     * Establece la fecha de finalización de la actividad.
+     * Establece la fecha de finalización de la actividad, validando que la fecha de in no sea anterior
+     * a la fecha de inicio.
      * @param fechaFin La nueva fecha de finalización.
+     * @throws FechaNoValidaException
      */
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
+        if(fechaFin.isBefore(fechaInicio)) {
+            throw new FechaNoValidaException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+        }
         this.fechaFin = fechaFin;
     }
 
@@ -137,11 +145,12 @@ public class Actividades {
      */
     @Override
     public String toString() {
-        return "Actividades{" +
-                "nombre='" + nombre +
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return "Actividad:" +
+                "\n\tNombre='" + nombre +
                 "\n\tdescripcion='" + descripcion +
-                "\n\tfechaInicio=" + fechaInicio +
-                "\n\tfechaFin=" + fechaFin +
+                "\n\tfechaInicio=" + (fechaInicio!=null ? fechaInicio.format(formatter) : "N/A") +
+                "\n\tfechaFin=" + (fechaFin!=null ? fechaFin.format(formatter) : "N/A") +
                 "\n\testado=" + estado +
                 "\n\tcomentario='" + comentario;
     }
