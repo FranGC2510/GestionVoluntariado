@@ -70,4 +70,52 @@ public class UtilidadesGenerales {
     public static boolean validaEmail(String email){
         return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
+
+    /**
+     * Comprueba si una fecha tiene el formato correcto 'dd/mm/yyyy' y si es válida.
+     * Primero verifica el formato con una expresión regular y luego revisa si el día existe en ese mes y año.
+     * @param fecha La fecha en formato 'dd/mm/yyyy'.
+     * @return true si la fecha es válida, false si no lo es.
+     */
+    public static boolean validaFecha(String fecha) {
+        return fecha.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$") &&
+                esDiaValido(Integer.parseInt(fecha.substring(0, 2)),
+                        Integer.parseInt(fecha.substring(3, 5)),
+                        Integer.parseInt(fecha.substring(6, 10)));
+    }
+
+    /**
+     * Comprueba si un día es válido según el mes y el año.
+     * @param dia Día de la fecha.
+     * @param mes Mes de la fecha.
+     * @param anio Año de la fecha.
+     * @return true si el día es válido, false si no lo es.
+     */
+    public static boolean esDiaValido(int dia, int mes, int anio) {
+        boolean resultado = false;
+
+        if (mes == 2) {
+            if (esAnioBisiesto(anio)) {
+                resultado = dia >= 1 && dia <= 29;
+            } else {
+                resultado = dia >= 1 && dia <= 28;
+            }
+        } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+            resultado = dia >= 1 && dia <= 30;
+        } else {
+            resultado = dia >= 1 && dia <= 31;
+        }
+
+        return resultado;
+    }
+
+    /**
+     * Comprueba si un año es bisiesto.
+     * Un año es bisiesto si es divisible por 4, pero no por 100, a menos que también sea divisible por 400.
+     * @param anio Año a comprobar.
+     * @return true si el año es bisiesto, false si no lo es.
+     */
+    public static boolean esAnioBisiesto(int anio) {
+        return (anio % 4 == 0 && (anio % 100 != 0 || anio % 400 == 0));
+    }
 }
