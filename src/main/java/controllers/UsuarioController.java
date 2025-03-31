@@ -12,8 +12,19 @@ public class UsuarioController {
      * Constructor del controlador de usuarios.
      */
     public UsuarioController() {
-        this.usuarios = XMLManager.readXML(new UsuariosLista(),"usuarios.xml");
-        if(usuarios == null){
+        /*
+        * Try catch:
+        * - Lee el archivo XML de usuarios y lo carga en la lista de usuarios.
+        * - Si no se encuentra el archivo o hay un error, inicializa la lista de usuarios vacía.
+        * e.printStackTrace(); imprime la traza de la excepción en la consola, ayudando a identificar el error.
+         */
+        try{
+            this.usuarios = XMLManager.readXML(new UsuariosLista(),"usuarios.xml");
+            if(usuarios == null){
+                usuarios = new UsuariosLista();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
             usuarios = new UsuariosLista();
         }
     }
@@ -44,8 +55,18 @@ public class UsuarioController {
     public boolean addUsuario(Usuario usuario) {
         boolean resultado = false;
         if(usuario!=null && usuarios.addUsuario(usuario)){
-            XMLManager.writeXML(usuarios,"usuarios.xml");
-            resultado = true;
+            /*
+             * Try catch:
+             * - Guarda la lista de usuarios en un archivo XML.
+             * - Si hay un error al guardar, se captura la excepción y se imprime la traza.
+             * e.printStackTrace(); imprime la traza de la excepción en la consola, ayudando a identificar el error.
+             */
+            try {
+                XMLManager.writeXML(usuarios,"usuarios.xml");
+                resultado = true;
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return resultado;
     }

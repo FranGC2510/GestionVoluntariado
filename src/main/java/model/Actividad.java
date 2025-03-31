@@ -161,10 +161,20 @@ public class Actividad {
     }
 
     /**
+     * Genera un ID único para la actividad basado en su nombre y fecha de inicio.
+     * @return El ID único de la actividad.
+     */
+
+    public String getId() {
+        return nombre + "_" + fechaInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    /**
      * Retorna una representación en texto del objeto Actividades,
      * mostrando todos sus atributos.
      * @return Una cadena de texto que representa la actividad.
      */
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -185,5 +195,4 @@ public class Actividad {
         }
         return resultado;
     }
-
 }

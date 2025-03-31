@@ -33,8 +33,19 @@ public class ActividadController implements Gestionable <Actividad> {
                 throw new ActividadExisteException("Iniciativa con ID " + actividad.getId() + " ya existe.");
             }
             if(actividades.add(actividad)){
-               // XMLManager.writeXML(actividades,"actividades.xml");
-                flag = true;
+                /*
+                 * Try catch:
+                 * XMLManager.writeXML(actividades,"actividades.xml"); guarda la lista de actividades en un archivo XML.
+                 * Si ocurre un error, se lanza la excepción.
+                 * e.printStackTrace(); imprime la traza de la excepción en la consola, ayudando a identificar el error.
+                 */
+                try {
+                    // XMLManager.writeXML(actividades,"actividades.xml");
+                    flag = true;
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         }
         return flag;
@@ -54,8 +65,19 @@ public class ActividadController implements Gestionable <Actividad> {
                 throw new ActividadNoEncontradaException("Actividad con ID " + actividad.getId() + " no ha sido encontrada.");
             }
             if(actividad.getVoluntarios().isEmpty() && actividades.remove(actividad)){
-               // XMLManager.writeXML(actividades,"actividades.xml");
-                eliminar = true;
+                /*
+                 * Try catch:
+                 * XMLManager.writeXML(actividades,"actividades.xml"); guarda la lista de actividades en un archivo XML.
+                 * Si ocurre un error, se lanza la excepción.
+                 * e.printStackTrace(); imprime la traza de la excepción en la consola, ayudando a identificar el error.
+                 */
+                try {
+                    // XMLManager.writeXML(actividades,"actividades.xml");
+                    eliminar = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }
         return eliminar;
