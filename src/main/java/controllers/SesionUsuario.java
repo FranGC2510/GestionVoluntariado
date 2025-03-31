@@ -23,5 +23,11 @@ public class SesionUsuario {
         this.usuarioActual = usuario;
     }
 
-
+    /**
+     *  Cierra la sesión del usuario actual.
+     *  Si no hay sesión activa, no realiza ninguna acción.
+     */
+    public void cerrarSesion() {
+        this.usuarioActual = null;
+    }
 }
