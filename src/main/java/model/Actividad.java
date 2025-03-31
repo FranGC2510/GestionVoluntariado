@@ -33,7 +33,7 @@ public class Actividad {
     public Actividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Estado estado, String comentario, HashSet<Voluntario> voluntarios) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.fechaInicio = fechaInicio;
+        setFechaInicio(fechaInicio);// Se valida en el setter
         setFechaFin(fechaFin); // Se valida en el setter
         this.estado = estado;
         this.comentario = comentario;
@@ -85,7 +85,9 @@ public class Actividad {
      * @param fechaInicio La nueva fecha de inicio.
      */
     public void setFechaInicio(LocalDate fechaInicio) {
-
+        if (fechaInicio.isBefore(LocalDate.now())) {
+            throw new FechaNoValidaException("La fecha de inicio no puede ser anterior a la fecha actual.");
+        }
         this.fechaInicio = fechaInicio;
     }
 
