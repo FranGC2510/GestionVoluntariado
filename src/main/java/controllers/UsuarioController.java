@@ -65,4 +65,20 @@ public class UsuarioController {
         }
         return resultado;
     }
+
+    /**
+     * Cierra la sesión del usuario actual si está activa.
+     * @return true si la sesión se cerró correctamente, false si no había sesión activa.
+     */
+    public boolean cerrarSesion() {
+        boolean resultado = false;
+        SesionUsuario sesion = SesionUsuario.getInstance();
+
+        if (sesion.getUsuarioActual() != null) {
+            sesion.cerrarSesion();
+            resultado = true;
+        }
+
+        return resultado;  // Retorna el valor de resultado
+    }
 }
