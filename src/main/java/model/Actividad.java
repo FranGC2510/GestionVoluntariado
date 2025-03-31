@@ -193,4 +193,18 @@ public class Actividad {
         return resultado;
     }
 
+    public void agregarVoluntario(Voluntario voluntario) {
+        if (voluntario == null) {
+            throw new NullPointerException("El voluntario no puede ser nulo.");
+        }
+
+        if (estado == Estado.FINALIZADA) {
+            throw new IllegalArgumentException("No se pueden agregar voluntarios a una actividad finalizada.");
+        }
+
+        if (!voluntarios.add(voluntario)) {
+            throw new IllegalArgumentException("El voluntario ya está registrado en esta actividad.");
+        }
+    }
+
 }

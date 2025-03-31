@@ -3,15 +3,18 @@ package controllers;
 import dataAccess.XMLManager;
 import exceptions.ActividadExisteException;
 import exceptions.ActividadNoEncontradaException;
+import exceptions.UsuarioNoEncontradoException;
 import interfaces.Gestionable;
 import model.Actividad;
 import model.ActividadLista;
+import model.Voluntario;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActividadController implements Gestionable <Actividad> {
     private ActividadLista actividades;
+    private UsuarioController usuarioController;
     /**
      * Constructor del controlador de actividades.
      */
@@ -20,6 +23,7 @@ public class ActividadController implements Gestionable <Actividad> {
         if(actividades == null){
             actividades = new ActividadLista();
         }
+        this.usuarioController = new UsuarioController();
     }
 
     /**
@@ -44,7 +48,14 @@ public class ActividadController implements Gestionable <Actividad> {
 
     @Override
     public Actividad buscarPorId(String id) {
-        return null;
+        Actividad actividad = null;
+        for (Actividad a : actividades.getActividades()) {
+            if (a.getId().equals(id)) {
+                actividad = a;
+                break;
+            }
+        }
+        return actividad;
     }
 
     /**
@@ -74,7 +85,29 @@ public class ActividadController implements Gestionable <Actividad> {
      */
     @Override
     public List<Actividad> listar() {
-        return new ArrayList<>(actividades.getActividades()); // Devuelve una copia para evitar modificaciones externas
+        return new ArrayList<>(actividades.getActividades());
     }
+
+
+    public void agregarVoluntarioActividad(String idActividad, String nombreUsuario) {
+        Actividad actividad = buscarPorId(idActividad);
+        if (actividad == null) {
+            throw new ActividadNoEncontradaException("Actividad con ID " + idActividad + " no encontrada.");
+        }
+
+        Voluntario voluntario = usuarioController.buscarVoluntarioPorNombre(nombreUsuario);
+
+        if (voluntario == null) {
+            throw new UsuarioNoEncontradoException("El voluntario con usuario '" + nombreUsuario + "' no existe.");
+        }
+
+        try {
+            actividad.agregarVoluntario(voluntario);
+            XMLManager.writeXML(actividades, "actividades.xml");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 }
 

@@ -1,8 +1,10 @@
 package controllers;
 
 import dataAccess.XMLManager;
+import exceptions.UsuarioNoEncontradoException;
 import model.Usuario;
 import model.UsuariosLista;
+import model.Voluntario;
 import utils.PasswordUtilidades;
 import views.VistaConsola;
 
@@ -81,4 +83,14 @@ public class UsuarioController {
 
         return resultado;  // Retorna el valor de resultado
     }
+
+    public Voluntario buscarVoluntarioPorNombre(String nombreUsuario) {
+        for (Usuario usuario : usuarios.getUsuarios()) {
+            if (usuario instanceof Voluntario && usuario.getUsuario().equals(nombreUsuario)) {
+                return (Voluntario) usuario;
+            }
+        }
+        throw new UsuarioNoEncontradoException("El voluntario con nombre de usuario " + nombreUsuario + " no existe.");
+    }
+
 }
