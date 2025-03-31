@@ -41,10 +41,9 @@ public class UsuarioController {
      * @return true si el usuario fue añadido correctamente y los datos se guardaron en el archivo,
      *         false en caso contrario.
      */
-    public boolean addUsuario() {
+    public boolean addUsuario(Usuario usuario) {
         boolean resultado = false;
-        Usuario nuevoUsuario= VistaConsola.registro(VistaConsola.tipoRegistro());
-        if(nuevoUsuario!=null && usuarios.addUsuario(nuevoUsuario)){
+        if(usuario!=null && usuarios.addUsuario(usuario)){
             XMLManager.writeXML(usuarios,"usuarios.xml");
             resultado = true;
         }

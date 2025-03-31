@@ -48,8 +48,8 @@ public class XMLManager {
      */
     public static <T> T readXML(T objeto, String fileName) {
         T result = null;
-        if(!existeXML(fileName)) {
-            File file = new File(fileName);
+        File file = new File(fileName);
+        if(!existeXML(fileName) || file.length() == 0) {
             try{
                 file.createNewFile();
                 writeXML(objeto, fileName);

@@ -1,32 +1,42 @@
 package model;
 
+import controllers.SesionUsuario;
+
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Representa una iniciativa con un identificador único, nombre, descripción,
  * un creador y una lista de voluntarios asociados.
+ * Se utiliza JAXB para la serialización en XML.
  */
+@XmlRootElement(name="iniciativa")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Iniciativa {
     private static int contadorID=1;
     private int id;
     private String nombre;
     private String descripcion;
-    private Creador creador;
-    private HashSet<Voluntario> voluntarios;
+    private String creador;
 
+    @XmlElementWrapper (name = "actividades")
+    @XmlElement (name = "actividad")
+    private List<Actividad> actividades;
+
+    public Iniciativa() {}
     /**
      * Constructor que inicializa una nueva iniciativa con todos sus atributos.
      * @param nombre El nombre de la iniciativa.
      * @param descripcion La descripción detallada de la iniciativa.
-     * @param creador El creador responsable de la iniciativa.
-     * @param voluntarios La lista de voluntarios que participan en la iniciativa.
      */
-    public Iniciativa(String nombre, String descripcion, Creador creador, HashSet<Voluntario> voluntarios) {
+    public Iniciativa(String nombre, String descripcion) {
         this.id = contadorID++;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.creador = creador;
-        this.voluntarios = voluntarios;
+        this.creador = SesionUsuario.getInstance().getUsuarioActual().getNombre();
+        this.actividades = new ArrayList<>();
     }
 
     /**
@@ -73,7 +83,7 @@ public class Iniciativa {
      * Obtiene el creador de la iniciativa.
      * @return El creador de la iniciativa.
      */
-    public Creador getCreador() {
+    public String getCreador() {
         return creador;
     }
 
@@ -81,24 +91,24 @@ public class Iniciativa {
      * Establece el creador de la iniciativa.
      * @param creador El nuevo creador de la iniciativa.
      */
-    public void setCreador(Creador creador) {
+    public void setCreador(String creador) {
         this.creador = creador;
     }
 
     /**
-     * Obtiene la lista de voluntarios que participan en la iniciativa.
-     * @return La lista de voluntarios.
+     * Obtiene la lista de actividades que hay en la iniciativa.
+     * @return La lista de actividades.
      */
-    public HashSet<Voluntario> getVoluntarios() {
-        return voluntarios;
+    public List<Actividad> getActividades() {
+        return actividades;
     }
 
     /**
-     * Establece la lista de voluntarios de la iniciativa.
-     * @param voluntarios La nueva lista de voluntarios.
+     * Establece la lista de actividades de la iniciativa .
+     * @param actividades La nueva lista de actividades.
      */
-    public void setVoluntarios(HashSet<Voluntario> voluntarios) {
-        this.voluntarios = voluntarios;
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = actividades;
     }
 
     /**
@@ -109,16 +119,16 @@ public class Iniciativa {
     @Override
     public String toString() {
         String resultado="Iniciativa: " +
-                "\n\tCodigo ID= " + id +
-                "\n\tNombre= " + nombre +
-                "\n\tDescripcion= " + descripcion +
-                "\n\tCreador= " + creador +
-                "\n\tVoluntarios= ";
-        if(voluntarios.isEmpty()){
-            resultado+="No hay voluntarios";
+                "\n\tCodigo ID -> " + id +
+                "\n\tNombre -> " + nombre +
+                "\n\tDescripcion -> " + descripcion +
+                "\n\tCreador -> " + creador +
+                "\n\tActividades -> ";
+        if(actividades.isEmpty()){
+            resultado+="No hay actividades";
         }else{
-            for(Voluntario voluntario:voluntarios){
-                resultado+="\n\t\t- " + voluntario.getNombre();
+            for(Actividad act:actividades){
+                resultado+="\n\t\t- " + act.getNombre();
             }
         }
         return resultado;

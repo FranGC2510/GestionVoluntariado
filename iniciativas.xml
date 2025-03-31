@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Iniciativas>
+    <iniciativa>
+        <id>1</id>
+        <nombre>Reforestar bosque</nombre>
+        <descripcion>Vamos a reforestar el bosque de la sierra.</descripcion>
+        <creador>Felipe López</creador>
+        <actividades/>
+    </iniciativa>
+</Iniciativas>

@@ -1,13 +1,16 @@
 package views;
 
+import controllers.SesionUsuario;
 import exceptions.EmailInvalidoException;
 import exceptions.PasswordInvalidaException;
 import model.Creador;
+import model.Iniciativa;
 import model.Usuario;
 import model.Voluntario;
 import utils.PasswordUtilidades;
 import utils.UtilidadesGenerales;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class VistaConsola {
@@ -75,7 +78,7 @@ public class VistaConsola {
      *             1 - Creador, 2 - Voluntario.
      * @return Un objeto {@link Usuario} del tipo especificado (Creador o Voluntario).
      */
-    public static Usuario registro(int tipo){
+    public static Usuario registroUsuario(int tipo){
         Usuario nuevoUsuario=null;
         boolean flag=false;
 
@@ -199,12 +202,30 @@ public class VistaConsola {
                 ---------------------------------------------------
                   1. Crear una nueva iniciativa
                   2. Ver todas mis iniciativas
-                  3. Editar mis iniciativas
-                  4. Cerrar sesión
+                  3. Añadir actividades a una iniciativa
+                  4. Eliminar una iniciativa
+                  5. Cerrar sesión
                 ---------------------------------------------------
                 """;
         System.out.println(diseyoAscii);
 
-        return UtilidadesGenerales.pideEntero("Elija una opción: ",1,4);
+        return UtilidadesGenerales.pideEntero("Elija una opción: ",1,5);
+    }
+
+    public static Iniciativa registrarIniciativa(){
+        Iniciativa nuevaIniciativa=null;
+
+        System.out.print("Introduzca nombre de la iniciativa: ");
+        String nombre = sc.nextLine();
+        System.out.print("Introduzca descripción de la iniciativa: ");
+        String descripcion = sc.nextLine();
+
+        nuevaIniciativa=new Iniciativa(nombre, descripcion);
+        return nuevaIniciativa;
+    }
+    public static void listadoIniciativas(List<Iniciativa> iniciativas){
+        for(Iniciativa iniciativa:iniciativas){
+            System.out.println(iniciativa);
+        }
     }
 }

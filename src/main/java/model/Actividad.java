@@ -5,6 +5,7 @@ import interfaces.Estado;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 
 /**
  * Representa una actividad con información detallada sobre su nombre,
@@ -17,6 +18,7 @@ public class Actividad {
     private LocalDate fechaFin;
     private Estado estado;
     private String comentario;
+    private HashSet<Voluntario> voluntarios;
 
     /**
      * Constructor que inicializa una nueva actividad con todos sus atributos.
@@ -26,14 +28,16 @@ public class Actividad {
      * @param fechaFin La fecha de finalización de la actividad.
      * @param estado El estado actual de la actividad.
      * @param comentario Comentarios adicionales sobre la actividad.
+     * @param voluntarios La lista de voluntarios que participan en la actividad.
      */
-    public Actividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Estado estado, String comentario) {
+    public Actividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Estado estado, String comentario, HashSet<Voluntario> voluntarios) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         setFechaFin(fechaFin); // Se valida en el setter
         this.estado = estado;
         this.comentario = comentario;
+        this.voluntarios = voluntarios;
     }
 
     /**
@@ -139,6 +143,22 @@ public class Actividad {
     }
 
     /**
+     * Obtiene la lista de voluntarios que participan en la actividad.
+     * @return La lista de voluntarios.
+     */
+    public HashSet<Voluntario> getVoluntarios() {
+        return voluntarios;
+    }
+
+    /**
+     * Establece la lista de voluntarios de la actividad.
+     * @param voluntarios La nueva lista de voluntarios.
+     */
+    public void setVoluntarios(HashSet<Voluntario> voluntarios) {
+        this.voluntarios = voluntarios;
+    }
+
+    /**
      * Retorna una representación en texto del objeto Actividades,
      * mostrando todos sus atributos.
      * @return Una cadena de texto que representa la actividad.
@@ -146,13 +166,22 @@ public class Actividad {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return "Actividad:" +
+        String resultado="Actividad:" +
                 "\n\tNombre='" + nombre +
                 "\n\tdescripcion='" + descripcion +
                 "\n\tfechaInicio=" + (fechaInicio!=null ? fechaInicio.format(formatter) : "N/A") +
                 "\n\tfechaFin=" + (fechaFin!=null ? fechaFin.format(formatter) : "N/A") +
                 "\n\testado=" + estado +
-                "\n\tcomentario='" + comentario;
+                "\n\tcomentario='" + comentario +
+                "\n\tVoluntarios= ";
+        if(voluntarios.isEmpty()){
+            resultado+="No hay voluntarios";
+        }else{
+            for(Voluntario voluntario:voluntarios){
+                resultado+="\n\t\t- " + voluntario.getNombre()+" ("+voluntario.getUsuario()+")";
+            }
+        }
+        return resultado;
     }
 
 }
