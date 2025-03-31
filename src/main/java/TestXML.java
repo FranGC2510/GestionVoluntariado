@@ -6,6 +6,7 @@ import model.Creador;
 import model.Usuario;
 import model.UsuariosLista;
 import model.Voluntario;
+import utils.UtilidadesGenerales;
 import views.VistaConsola;
 
 public class TestXML {
@@ -49,6 +50,13 @@ public class TestXML {
                                 case 2:
                                     VistaConsola.listadoIniciativas(controladorIni.listar());
                                     break;
+                                case 3:
+                                    ;
+                                    if(controladorIni.addActividad(controladorIni.buscarPorId(UtilidadesGenerales.pideString("Introduce el identificador de la iniciativa: ")),VistaConsola.registrarActividad())){
+                                        System.out.println("Se añadió la actividad.");
+                                    }else{
+                                        System.out.println("Error al registrar la actividad.");
+                                    }
                                 /* HARIA FALTA UN METODO DE BUSCAR LA INICIATIVA POR ID
                             case 4:
                                 if(controladorIni.eliminar())

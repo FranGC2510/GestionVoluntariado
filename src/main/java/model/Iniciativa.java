@@ -1,6 +1,7 @@
 package model;
 
 import controllers.SesionUsuario;
+import utils.GeneradorID;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -15,8 +16,7 @@ import java.util.List;
 @XmlRootElement(name="iniciativa")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Iniciativa {
-    private static int contadorID=1;
-    private int id;
+    private String id;
     private String nombre;
     private String descripcion;
     private String creador;
@@ -32,7 +32,7 @@ public class Iniciativa {
      * @param descripcion La descripción detallada de la iniciativa.
      */
     public Iniciativa(String nombre, String descripcion) {
-        this.id = contadorID++;
+        this.id = GeneradorID.generarID();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.creador = SesionUsuario.getInstance().getUsuarioActual().getNombre();
@@ -43,7 +43,7 @@ public class Iniciativa {
      * Obtiene el identificador único de la iniciativa.
      * @return El ID de la iniciativa.
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -119,7 +119,7 @@ public class Iniciativa {
     @Override
     public String toString() {
         String resultado="Iniciativa: " +
-                "\n\tCodigo ID -> " + id +
+                "\n\tIdentificador -> " + id +
                 "\n\tNombre -> " + nombre +
                 "\n\tDescripcion -> " + descripcion +
                 "\n\tCreador -> " + creador +

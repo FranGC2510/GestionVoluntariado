@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Usuarios>
     <creador>
-        <email>felipe@gmail.com</email>
-        <nombre>Felipe López</nombre>
-        <password>$2a$10$2XVX/VIpFNpWGRgRHw3lNe6NwMKDDxGvup4Xsw420QnG6nCsOxlT6</password>
-        <nombreUsuario>felipe</nombreUsuario>
-        <ONG>ONG</ONG>
-    </creador>
-    <voluntario>
-        <email>fern@gmail.com</email>
-        <nombre>Fernando</nombre>
-        <password>$2a$10$GKeDXX7Zu5vmetoiXcPhIeJaCzm9DUHR2W221rHl.bfXup4hL0QlC</password>
-        <nombreUsuario>fer</nombreUsuario>
-        <puntosTotales>0</puntosTotales>
-    </voluntario>
-    <voluntario>
         <email>fran@gmail.com</email>
         <nombre>Fran Garcia</nombre>
-        <password>$2a$10$dlJOCA3iPuGPgo6A7pLttOsc4GIuUW4784ZkI5fcV7..8D86FXwc6</password>
+        <password>$2a$10$F.RcrOBevJKCBcyH/teode6oBRWGtR2I7mxe6mPA.pjQESNitrK9K</password>
         <nombreUsuario>fran</nombreUsuario>
-        <puntosTotales>0</puntosTotales>
-    </voluntario>
+        <ONG>ONG</ONG>
+    </creador>
 </Usuarios>
