@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Iniciativas>
     <iniciativa>
-        <id>1</id>
-        <nombre>Reforestar bosque</nombre>
-        <descripcion>Vamos a reforestar el bosque de la sierra.</descripcion>
-        <creador>Felipe López</creador>
-        <actividades/>
+        <id>a3f</id>
+        <nombre>hgbduaghujf</nombre>
+        <descripcion>aesfsgsxgdsh</descripcion>
+        <creador>Fran Garcia</creador>
+        <actividades>
+            <actividad>
+                <descripcion>kjbjb</descripcion>
+                <estado>PENDIENTE</estado>
+                <nombre>kjnlkjnl</nombre>
+            </actividad>
+        </actividades>
     </iniciativa>
 </Iniciativas>

@@ -1,9 +1,11 @@
 package controllers;
 
 import dataAccess.XMLManager;
+import exceptions.ActividadExisteException;
 import interfaces.Gestionable;
 import exceptions.IniciativaNoEncontradaException;
 import exceptions.IniciativaExisteException;
+import model.Actividad;
 import model.Iniciativa;
 import model.IniciativaLista;
 import model.UsuariosLista;
@@ -48,23 +50,18 @@ public class IniciativaController implements Gestionable<Iniciativa> {
         }
         return flag;
     }
-/*
-    /**
-     * Lee y retorna una iniciativa por su ID.
-     * @param id El ID de la iniciativa a leer.
-     * @return La iniciativa encontrada.
-     * @throws IniciativaNoEncontradaException Si no se encuentra una iniciativa con el ID especificado.
-     *
+
     @Override
-    public Iniciativa leer(int id) {
-        for (Iniciativa iniciativa : iniciativas) {
-            if (iniciativa.getId() == id) {
-                return iniciativa;
+    public Iniciativa buscarPorId(String id) {
+        Iniciativa iniciativa = null;
+        for(Iniciativa ini : iniciativas.getIniciativas()){
+            if(ini.getId().equals(id)){
+                iniciativa = ini;
             }
         }
-        throw new IniciativaNoEncontradaException("Iniciativa con ID " + id + " no ha sido encontrada.");
+        return iniciativa;
     }
-*/
+
     /**
      *  Elimina una iniciativa, en el caso de que no tenga actividades asignadas.
      * @param iniciativa Iniciativa que se quiere eliminar.
@@ -93,5 +90,19 @@ public class IniciativaController implements Gestionable<Iniciativa> {
     @Override
     public List<Iniciativa> listar() {
         return new ArrayList<>(iniciativas.getIniciativas()); // Devuelve una copia para evitar modificaciones externas
+    }
+
+    public boolean addActividad(Iniciativa iniciativa,Actividad actividad) {
+        boolean flag = false;
+        if(actividad!=null && iniciativa!=null){
+            if(iniciativa.getActividades().contains(actividad)){
+                throw new ActividadExisteException("Actividad con ID " + actividad.getId() + " ya existe.");
+            }
+            if(iniciativa.getActividades().add(actividad)){
+                XMLManager.writeXML(iniciativas,"iniciativas.xml");
+                flag = true;
+            }
+        }
+        return flag;
     }
 }

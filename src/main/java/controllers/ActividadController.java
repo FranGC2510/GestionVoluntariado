@@ -3,21 +3,23 @@ package controllers;
 import dataAccess.XMLManager;
 import exceptions.ActividadExisteException;
 import exceptions.ActividadNoEncontradaException;
-import exceptions.IniciativaExisteException;
-import exceptions.IniciativaNoEncontradaException;
 import interfaces.Gestionable;
 import model.Actividad;
-import model.Iniciativa;
-import model.Voluntario;
+import model.ActividadLista;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActividadController implements Gestionable <Actividad> {
-    private List<Actividad> actividades;
-
-    public ActividadController(List<Actividad> actividades) {
-        this.actividades = actividades;
+    private ActividadLista actividades;
+    /**
+     * Constructor del controlador de actividades.
+     */
+    public ActividadController() {
+        this.actividades = XMLManager.readXML(new ActividadLista(),"actividades.xml");
+        if(actividades == null){
+            actividades = new ActividadLista();
+        }
     }
 
     /**
@@ -29,15 +31,20 @@ public class ActividadController implements Gestionable <Actividad> {
     public boolean crear(Actividad actividad) {
         boolean flag = false;
         if(actividad!=null){
-            if(actividades.contains(actividad)){
+            if(actividades.containsActividad(actividad)){
                 throw new ActividadExisteException("Iniciativa con ID " + actividad.getId() + " ya existe.");
             }
-            if(actividades.add(actividad)){
-               // XMLManager.writeXML(actividades,"actividades.xml");
+            if(actividades.addActividad(actividad)){
+                XMLManager.writeXML(actividades,"actividades.xml");
                 flag = true;
             }
         }
         return flag;
+    }
+
+    @Override
+    public Actividad buscarPorId(String id) {
+        return null;
     }
 
     /**
@@ -50,11 +57,11 @@ public class ActividadController implements Gestionable <Actividad> {
     public boolean eliminar(Actividad actividad) {
         boolean eliminar = false;
         if(actividad!=null){
-            if(!actividades.contains(actividad)){
+            if(!actividades.containsActividad(actividad)){
                 throw new ActividadNoEncontradaException("Actividad con ID " + actividad.getId() + " no ha sido encontrada.");
             }
-            if(actividad.getVoluntarios().isEmpty() && actividades.remove(actividad)){
-               // XMLManager.writeXML(actividades,"actividades.xml");
+            if(actividad.getVoluntarios().isEmpty() && actividades.removeActividad(actividad)){
+                XMLManager.writeXML(actividades,"actividades.xml");
                 eliminar = true;
             }
         }
@@ -67,7 +74,7 @@ public class ActividadController implements Gestionable <Actividad> {
      */
     @Override
     public List<Actividad> listar() {
-        return new ArrayList<>(actividades); // Devuelve una copia para evitar modificaciones externas
+        return new ArrayList<>(actividades.getActividades()); // Devuelve una copia para evitar modificaciones externas
     }
 }
 

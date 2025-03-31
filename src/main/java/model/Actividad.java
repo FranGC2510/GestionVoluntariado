@@ -2,6 +2,7 @@ package model;
 
 import exceptions.FechaNoValidaException;
 import interfaces.Estado;
+import utils.GeneradorID;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +13,7 @@ import java.util.HashSet;
  * descripción, fechas de inicio y fin, estado actual y comentarios adicionales.
  */
 public class Actividad {
+    private String Id;
     private String nombre;
     private String descripcion;
     private LocalDate fechaInicio;
@@ -26,18 +28,16 @@ public class Actividad {
      * @param descripcion La descripción de la actividad.
      * @param fechaInicio La fecha de inicio de la actividad.
      * @param fechaFin La fecha de finalización de la actividad.
-     * @param estado El estado actual de la actividad.
-     * @param comentario Comentarios adicionales sobre la actividad.
-     * @param voluntarios La lista de voluntarios que participan en la actividad.
      */
-    public Actividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Estado estado, String comentario, HashSet<Voluntario> voluntarios) {
+    public Actividad(String nombre, String descripcion, String fechaInicio, String fechaFin) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         setFechaInicio(fechaInicio);// Se valida en el setter
         setFechaFin(fechaFin); // Se valida en el setter
-        this.estado = estado;
+        this.estado = Estado.PENDIENTE;
         this.comentario = comentario;
-        this.voluntarios = voluntarios;
+        this.Id = GeneradorID.generarID();
+        this.voluntarios = new HashSet<>();
     }
 
     /**
@@ -84,11 +84,12 @@ public class Actividad {
      * Establece la fecha de inicio de la actividad.
      * @param fechaInicio La nueva fecha de inicio.
      */
-    public void setFechaInicio(LocalDate fechaInicio) {
-        if (fechaInicio.isBefore(LocalDate.now())) {
+    public void setFechaInicio(String fechaInicio) {
+        LocalDate fecha = LocalDate.parse(fechaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (fecha.isBefore(LocalDate.now())) {
             throw new FechaNoValidaException("La fecha de inicio no puede ser anterior a la fecha actual.");
         }
-        this.fechaInicio = fechaInicio;
+        this.fechaInicio = fecha;
     }
 
     /**
@@ -105,11 +106,12 @@ public class Actividad {
      * @param fechaFin La nueva fecha de finalización.
      * @throws FechaNoValidaException
      */
-    public void setFechaFin(LocalDate fechaFin) {
-        if(fechaFin.isBefore(fechaInicio)) {
+    public void setFechaFin(String fechaFin) {
+        LocalDate fecha = LocalDate.parse(fechaFin, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if(fecha.isBefore(fechaInicio)) {
             throw new FechaNoValidaException("La fecha de fin no puede ser anterior a la fecha de inicio.");
         }
-        this.fechaFin = fechaFin;
+        this.fechaFin = fecha;
     }
 
     /**
@@ -144,6 +146,10 @@ public class Actividad {
         this.comentario = comentario;
     }
 
+    public String getId() {
+        return Id;
+    }
+
     /**
      * Obtiene la lista de voluntarios que participan en la actividad.
      * @return La lista de voluntarios.
@@ -169,12 +175,13 @@ public class Actividad {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String resultado="Actividad:" +
-                "\n\tNombre='" + nombre +
-                "\n\tdescripcion='" + descripcion +
-                "\n\tfechaInicio=" + (fechaInicio!=null ? fechaInicio.format(formatter) : "N/A") +
-                "\n\tfechaFin=" + (fechaFin!=null ? fechaFin.format(formatter) : "N/A") +
-                "\n\testado=" + estado +
-                "\n\tcomentario='" + comentario +
+                "\n\tIdentificador= " + Id +
+                "\n\tNombre= " + nombre +
+                "\n\tdescripcion= " + descripcion +
+                "\n\tfechaInicio= " + (fechaInicio!=null ? fechaInicio.format(formatter) : "N/A") +
+                "\n\tfechaFin= " + (fechaFin!=null ? fechaFin.format(formatter) : "N/A") +
+                "\n\testado= " + estado +
+                "\n\tcomentario= " + comentario +
                 "\n\tVoluntarios= ";
         if(voluntarios.isEmpty()){
             resultado+="No hay voluntarios";
