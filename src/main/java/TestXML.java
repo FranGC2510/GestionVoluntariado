@@ -35,7 +35,7 @@ public class TestXML {
             opcion= VistaConsola.bienvenida();
             switch (opcion){
                 case 1:
-                    if(controladorUsu.iniciarSesion()){
+                    if(controladorUsu.iniciarSesion(VistaConsola.pideUsuario(),VistaConsola.pidePassword())){
                         System.out.println("Iniciando sesion...\n");
                         if(SesionUsuario.getInstance().getUsuarioActual().getClass().equals(Creador.class)){
                             int opc=VistaConsola.menuCreador();

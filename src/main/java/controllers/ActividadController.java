@@ -6,12 +6,14 @@ import exceptions.ActividadNoEncontradaException;
 import interfaces.Gestionable;
 import model.Actividad;
 import model.ActividadLista;
+import model.Voluntario;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// hkdnd
 public class ActividadController implements Gestionable <Actividad> {
     private ActividadLista actividades;
+    private UsuarioController usuarioController;
     /**
      * Constructor del controlador de actividades.
      */
@@ -20,6 +22,7 @@ public class ActividadController implements Gestionable <Actividad> {
         if(actividades == null){
             actividades = new ActividadLista();
         }
+        this.usuarioController = new UsuarioController();
     }
 
     /**
@@ -44,7 +47,14 @@ public class ActividadController implements Gestionable <Actividad> {
 
     @Override
     public Actividad buscarPorId(String id) {
-        return null;
+        Actividad actividad = null;
+        for (Actividad a : actividades.getActividades()) {
+            if (a.getId().equals(id)) {
+                actividad = a;
+                break;
+            }
+        }
+        return actividad;
     }
 
     /**
@@ -74,7 +84,8 @@ public class ActividadController implements Gestionable <Actividad> {
      */
     @Override
     public List<Actividad> listar() {
-        return new ArrayList<>(actividades.getActividades()); // Devuelve una copia para evitar modificaciones externas
+        return new ArrayList<>(actividades.getActividades());
     }
+
 }
 
