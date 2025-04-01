@@ -29,15 +29,15 @@ public class ActividadLista {
      * @return Un conjunto de objetos de tipo {@link Actividad}
      */
     public List<Actividad> getActividades() {
-        return actividades;
+        return new ArrayList<>(actividades);
     }
 
     /**
      * Establece la lista de actividades almacenadas.
      * @param actividades Conjunto de actividades que se asignará a la lista.
      */
-    public void setIniciativas(List<Actividad> actividades) {
-        this.actividades = actividades;
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = new ArrayList<>(actividades);
     }
 
     /**
@@ -49,10 +49,20 @@ public class ActividadLista {
         return this.actividades.add(actividad);
     }
 
+    /**
+     * Elimina una actividad de la lista.
+     * @param actividad La actividad a eliminar.
+     * @return true si la actividad fue eliminada, false si no existía.
+     */
     public boolean removeActividad(Actividad actividad) {
         return this.actividades.remove(actividad);
     }
 
+    /**
+     * Verifica si una actividad existe en la lista.
+     * @param actividad La actividad a buscar.
+     * @return true si la actividad existe, false en caso contrario.
+     */
     public boolean containsActividad(Actividad actividad) {
         return this.actividades.contains(actividad);
     }
