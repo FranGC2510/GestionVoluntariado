@@ -5,6 +5,7 @@ import model.Usuario;
 import model.UsuariosLista;
 import utils.PasswordUtilidades;
 import views.VistaConsola;
+import views.VistaUsuario;
 
 public class UsuarioController {
     private UsuariosLista usuarios;
@@ -53,8 +54,8 @@ public class UsuarioController {
     public boolean iniciarSesion(){
         boolean resultado = false;
         SesionUsuario sesion=SesionUsuario.getInstance();
-        String usuario=VistaConsola.pideUsuario();
-        String password=VistaConsola.pidePassword();
+        String usuario= VistaUsuario.pideUsuario();
+        String password=VistaUsuario.pidePassword();
 
         for(Usuario u: usuarios.getUsuarios()){
             if(u.getUsuario()!=null && u.getPassword()!=null && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
