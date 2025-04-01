@@ -100,7 +100,7 @@ public class Iniciativa {
      * @return La lista de actividades.
      */
     public List<Actividad> getActividades() {
-        return new ArrayList<>(actividades);
+        return actividades;
     }
 
     /**

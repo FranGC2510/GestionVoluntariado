@@ -34,6 +34,7 @@ public class Actividad {
     @XmlElement(name = "voluntario")
     private HashSet<Voluntario> voluntarios;
 
+    public Actividad() {}
     /**
      * Constructor que inicializa una nueva actividad con todos sus atributos.
      * @param nombre El nombre de la actividad.

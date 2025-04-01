@@ -101,4 +101,31 @@ public class IniciativaController implements Gestionable<Iniciativa> {
     public List<Iniciativa> listar() {
         return new ArrayList<>(iniciativas.getIniciativas()); // Devuelve una copia para evitar modificaciones externas
     }
+
+    public List<Actividad> listarActividadesByIniciativa(String id) {
+        Iniciativa iniciativa=buscarPorId(id);
+        return iniciativa.getActividades();
+    }
+
+    public boolean addActividad(String id,Actividad actividad) {
+        boolean flag = false;
+        Iniciativa iniciativa=buscarPorId(id);
+        if(iniciativa!=null){
+            iniciativa.getActividades().add(actividad);
+            XMLManager.writeXML(iniciativas,"iniciativas.xml");
+            flag = true;
+        }
+        return flag;
+    }
+
+    public boolean removeActividad(String id,Actividad actividad) {
+        boolean flag = false;
+        Iniciativa iniciativa=buscarPorId(id);
+        if(iniciativa!=null){
+            iniciativa.getActividades().remove(actividad);
+            XMLManager.writeXML(iniciativas,"iniciativas.xml");
+            flag = true;
+        }
+        return flag;
+    }
 }
