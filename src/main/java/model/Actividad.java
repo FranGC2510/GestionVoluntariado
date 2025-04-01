@@ -4,6 +4,7 @@ import exceptions.FechaNoValidaException;
 import interfaces.Estado;
 import utils.GeneradorID;
 
+import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -12,6 +13,8 @@ import java.util.HashSet;
  * Representa una actividad con información detallada sobre su nombre,
  * descripción, fechas de inicio y fin, estado actual y comentarios adicionales.
  */
+@XmlRootElement(name="actividad")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Actividad {
     private String Id;
     private String nombre;
@@ -20,8 +23,11 @@ public class Actividad {
     private LocalDate fechaFin;
     private Estado estado;
     private String comentario;
+    @XmlElementWrapper(name = "voluntarios")
+    @XmlElement(name = "voluntario")
     private HashSet<Voluntario> voluntarios;
 
+    public Actividad() {}
     /**
      * Constructor que inicializa una nueva actividad con todos sus atributos.
      * @param nombre El nombre de la actividad.

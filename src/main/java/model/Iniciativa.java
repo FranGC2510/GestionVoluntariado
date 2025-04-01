@@ -128,7 +128,7 @@ public class Iniciativa {
             resultado+="No hay actividades";
         }else{
             for(Actividad act:actividades){
-                resultado+="\n\t\t- " + act.getNombre();
+                resultado+="\n\t\t\t- " + act.getNombre();
             }
         }
         return resultado;
