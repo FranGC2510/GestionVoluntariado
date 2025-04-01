@@ -91,7 +91,7 @@ public class IniciativaController implements Gestionable<Iniciativa> {
     public List<Iniciativa> listar() {
         return new ArrayList<>(iniciativas.getIniciativas()); // Devuelve una copia para evitar modificaciones externas
     }
-
+// REVISAR LA SERIALIZACION DE LA ACTIVIDAD, HABRIA QUE LLAMAR AL METODO CREAR DEL CONTROLADOR DE LA ACTIVIDAD
     public boolean addActividad(Iniciativa iniciativa,Actividad actividad) {
         boolean flag = false;
         if(actividad!=null && iniciativa!=null){

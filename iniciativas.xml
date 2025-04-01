@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Iniciativas>
     <iniciativa>
-        <id>a3f</id>
-        <nombre>hgbduaghujf</nombre>
-        <descripcion>aesfsgsxgdsh</descripcion>
+        <id>8c4</id>
+        <nombre>arfdf</nombre>
+        <descripcion>sdgsdg</descripcion>
         <creador>Fran Garcia</creador>
         <actividades>
             <actividad>
-                <descripcion>kjbjb</descripcion>
+                <Id>67e</Id>
+                <nombre>xdgdg</nombre>
+                <descripcion>dgfsg</descripcion>
+                <fechaInicio/>
+                <fechaFin/>
                 <estado>PENDIENTE</estado>
-                <nombre>kjnlkjnl</nombre>
+                <voluntarios/>
             </actividad>
         </actividades>
     </iniciativa>
