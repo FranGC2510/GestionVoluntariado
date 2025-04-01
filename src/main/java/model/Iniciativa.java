@@ -100,7 +100,7 @@ public class Iniciativa {
      * @return La lista de actividades.
      */
     public List<Actividad> getActividades() {
-        return actividades;
+        return new ArrayList<>(actividades);
     }
 
     /**
@@ -128,7 +128,9 @@ public class Iniciativa {
             resultado+="No hay actividades";
         }else{
             for(Actividad act:actividades){
-                resultado+="\n\t\t- " + act.getNombre();
+                resultado += "\n\t\t- ID: " + act.getId() +
+                        " | Nombre: " + act.getNombre() +
+                        " | Estado: " + act.getEstado();
             }
         }
         return resultado;
