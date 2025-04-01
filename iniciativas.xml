@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Iniciativas>
     <iniciativa>
-        <id>8c4</id>
-        <nombre>arfdf</nombre>
-        <descripcion>sdgsdg</descripcion>
+        <id>bc3</id>
+        <nombre>Reforestar bosques</nombre>
+        <descripcion>Reforestacion de los bosques de andalucia</descripcion>
         <creador>Fran Garcia</creador>
-        <actividades>
-            <actividad>
-                <Id>67e</Id>
-                <nombre>xdgdg</nombre>
-                <descripcion>dgfsg</descripcion>
-                <fechaInicio/>
-                <fechaFin/>
-                <estado>PENDIENTE</estado>
-                <voluntarios/>
-            </actividad>
-        </actividades>
+        <actividades/>
     </iniciativa>
 </Iniciativas>

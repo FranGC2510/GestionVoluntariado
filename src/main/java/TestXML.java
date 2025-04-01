@@ -7,9 +7,10 @@ import model.Usuario;
 import model.UsuariosLista;
 import model.Voluntario;
 import utils.UtilidadesGenerales;
-import views.VistaConsola;
+
 
 public class TestXML {
+    /*
     public static void main(String[] args) {
         /*
         Usuario usuario1=new Creador("Miguel","miguelillo","1234","ghdjd@jh.com","PepeCalvo");
@@ -27,7 +28,7 @@ public class TestXML {
         if (listaUsuarios2!=null){
             System.out.println(listaUsuarios2);
         }
-         */
+
         UsuarioController controladorUsu=new UsuarioController();
         IniciativaController controladorIni=new IniciativaController();
         int opcion;
@@ -61,7 +62,7 @@ public class TestXML {
                             case 4:
                                 if(controladorIni.eliminar())
 
-                                 */
+
                             }
                         }
 
@@ -80,5 +81,5 @@ public class TestXML {
             }
         }while(opcion!=0);
 
-    }
+    }*/
 }

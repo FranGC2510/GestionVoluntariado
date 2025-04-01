@@ -13,15 +13,22 @@ import java.util.HashSet;
  * Representa una actividad con información detallada sobre su nombre,
  * descripción, fechas de inicio y fin, estado actual y comentarios adicionales.
  */
-@XmlRootElement(name="actividad")
+@XmlRootElement(name = "actividad")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Actividad {
+    @XmlElement(name = "id")
     private String Id;
+    @XmlElement(name = "nombre")
     private String nombre;
+    @XmlElement(name = "descripcion")
     private String descripcion;
+    @XmlElement(name = "fechaInicio")
     private LocalDate fechaInicio;
+    @XmlElement(name = "fechaFin")
     private LocalDate fechaFin;
+    @XmlElement(name = "estado")
     private Estado estado;
+    @XmlElement(name = "comentario")
     private String comentario;
     @XmlElementWrapper(name = "voluntarios")
     @XmlElement(name = "voluntario")
@@ -152,6 +159,10 @@ public class Actividad {
         this.comentario = comentario;
     }
 
+    /**
+     * Obtiene el identificador único de la actividad.
+     * @return El ID de la actividad.
+     */
     public String getId() {
         return Id;
     }
@@ -161,7 +172,7 @@ public class Actividad {
      * @return La lista de voluntarios.
      */
     public HashSet<Voluntario> getVoluntarios() {
-        return voluntarios;
+        return this.voluntarios = new HashSet<>(voluntarios);
     }
 
     /**
@@ -169,7 +180,8 @@ public class Actividad {
      * @param voluntarios La nueva lista de voluntarios.
      */
     public void setVoluntarios(HashSet<Voluntario> voluntarios) {
-        this.voluntarios = voluntarios;
+        this.voluntarios = new HashSet<>(voluntarios);
+
     }
 
     /**
@@ -179,24 +191,50 @@ public class Actividad {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String resultado="Actividad:" +
-                "\n\tIdentificador= " + Id +
-                "\n\tNombre= " + nombre +
-                "\n\tdescripcion= " + descripcion +
-                "\n\tfechaInicio= " + (fechaInicio!=null ? fechaInicio.format(formatter) : "N/A") +
-                "\n\tfechaFin= " + (fechaFin!=null ? fechaFin.format(formatter) : "N/A") +
-                "\n\testado= " + estado +
-                "\n\tcomentario= " + comentario +
-                "\n\tVoluntarios= ";
-        if(voluntarios.isEmpty()){
-            resultado+="No hay voluntarios";
-        }else{
-            for(Voluntario voluntario:voluntarios){
-                resultado+="\n\t\t- " + voluntario.getNombre()+" ("+voluntario.getUsuario()+")";
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String resultado = "Actividad:" +
+                "\n\tIdentificador: " + Id +
+                "\n\tNombre: " + nombre +
+                "\n\tDescripción: " + descripcion +
+                "\n\tFecha Inicio: " + (fechaInicio != null ? fechaInicio.format(formato) : "N/A") +
+                "\n\tFecha Fin: " + (fechaFin != null ? fechaFin.format(formato) : "N/A") +
+                "\n\tEstado: " + estado +
+                "\n\tComentario: " + comentario +
+                "\n\tVoluntarios:";
+
+        if(voluntarios.isEmpty()) {
+            resultado += "\t\tNo hay voluntarios";
+        } else {
+            for(Voluntario voluntario : voluntarios) {
+                resultado += "\t\t- Nombre: " + voluntario.getNombre() +
+                        " | Usuario: " + voluntario.getUsuario() +
+                        " | Puntos: " + voluntario.getPuntos() + "\n";
             }
         }
         return resultado;
+    }
+
+    /**
+     * Compara esta actividad con otro objeto para determinar si son iguales.
+     * Dos actividades son consideradas iguales si tienen el mismo ID.
+     * @param obj El objeto a comparar con esta actividad.
+     * @return true si las actividades son iguales, false en caso contrario.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null &&
+                obj.getClass() == getClass() &&
+                (this == obj || Id.equals(((Actividad) obj).Id));
+    }
+
+    /**
+     * Genera un código hash para esta actividad basado en su ID.
+     * Este método es consistente con equals().
+     * @return El código hash de la actividad.
+     */
+    @Override
+    public int hashCode() {
+        return Id.hashCode();
     }
 
 }

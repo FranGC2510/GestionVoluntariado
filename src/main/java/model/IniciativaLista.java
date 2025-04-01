@@ -27,7 +27,7 @@ public class IniciativaLista {
      * @return Un conjunto de objetos de tipo {@link Iniciativa}
      */
     public List<Iniciativa> getIniciativas() {
-        return iniciativas;
+        return new ArrayList<>(iniciativas);
     }
 
     /**
@@ -59,6 +59,7 @@ public class IniciativaLista {
      * Devuelve una representación en cadena de la lista de iniciativas.
      * @return Una cadena con la información de las iniciativas almacenadas.
      */
+    @Override
     public String toString() {
         return iniciativas.toString();
     }

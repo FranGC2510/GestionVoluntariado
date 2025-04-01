@@ -1,6 +1,6 @@
 package utils;
 
-import views.VistaConsola;
+import views.VistaComun;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class UtilidadesGenerales {
      * @return La cadena de texto introducida.
      */
     public static String pideString(String msn){
-        VistaConsola.mostrarMensaje(msn+" ");
+        VistaComun.mostrarMensaje(msn+" ");
         return teclado.next();
     }
     /**
@@ -29,15 +29,15 @@ public class UtilidadesGenerales {
         boolean flag=false;
         do{
             try{
-                VistaConsola.mostrarMensaje(msn);
+                VistaComun.mostrarMensaje(msn);
                 entero=teclado.nextInt();
                 if(comprobarRango(entero,valorMin,valorMax)){
                     flag=true;
                 }else {
-                    VistaConsola.mostrarMensaje("Debes introducir un valor entre "+valorMin+" y "+valorMax+".");
+                    VistaComun.mostrarMensaje("Debes introducir un valor entre "+valorMin+" y "+valorMax+".");
                 }
             }catch (InputMismatchException e){
-                VistaConsola.mostrarMensaje("Error. Tipo de dato incorrecto.");
+                VistaComun.mostrarMensaje("Error. Tipo de dato incorrecto.");
                 teclado.next();
             }
         }while(!flag);

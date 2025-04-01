@@ -51,15 +51,25 @@ public class IniciativaController implements Gestionable<Iniciativa> {
         return flag;
     }
 
+    /**
+     * Busca una iniciativa por su ID.
+     * @param id El ID de la iniciativa a buscar
+     * @return La iniciativa encontrada
+     * @throws IniciativaNoEncontradaException Si no se encuentra una iniciativa con el ID especificado
+     */
     @Override
     public Iniciativa buscarPorId(String id) {
-        Iniciativa iniciativa = null;
-        for(Iniciativa ini : iniciativas.getIniciativas()){
-            if(ini.getId().equals(id)){
-                iniciativa = ini;
+        Iniciativa iniciativaEncontrada = null;
+        for(Iniciativa ini : iniciativas.getIniciativas()) {
+            if(ini.getId().equals(id)) {
+                iniciativaEncontrada = ini;
+                break;
             }
         }
-        return iniciativa;
+        if(iniciativaEncontrada == null) {
+            throw new IniciativaNoEncontradaException("Iniciativa con ID " + id + " no ha sido encontrada.");
+        }
+        return iniciativaEncontrada;
     }
 
     /**
@@ -91,17 +101,30 @@ public class IniciativaController implements Gestionable<Iniciativa> {
     public List<Iniciativa> listar() {
         return new ArrayList<>(iniciativas.getIniciativas()); // Devuelve una copia para evitar modificaciones externas
     }
-// REVISAR LA SERIALIZACION DE LA ACTIVIDAD, HABRIA QUE LLAMAR AL METODO CREAR DEL CONTROLADOR DE LA ACTIVIDAD
-    public boolean addActividad(Iniciativa iniciativa,Actividad actividad) {
+
+    public List<Actividad> listarActividadesByIniciativa(String id) {
+        Iniciativa iniciativa=buscarPorId(id);
+        return iniciativa.getActividades();
+    }
+
+    public boolean addActividad(String id,Actividad actividad) {
         boolean flag = false;
-        if(actividad!=null && iniciativa!=null){
-            if(iniciativa.getActividades().contains(actividad)){
-                throw new ActividadExisteException("Actividad con ID " + actividad.getId() + " ya existe.");
-            }
-            if(iniciativa.getActividades().add(actividad)){
-                XMLManager.writeXML(iniciativas,"iniciativas.xml");
-                flag = true;
-            }
+        Iniciativa iniciativa=buscarPorId(id);
+        if(iniciativa!=null){
+            iniciativa.getActividades().add(actividad);
+            XMLManager.writeXML(iniciativas,"iniciativas.xml");
+            flag = true;
+        }
+        return flag;
+    }
+
+    public boolean removeActividad(String id,Actividad actividad) {
+        boolean flag = false;
+        Iniciativa iniciativa=buscarPorId(id);
+        if(iniciativa!=null){
+            iniciativa.getActividades().remove(actividad);
+            XMLManager.writeXML(iniciativas,"iniciativas.xml");
+            flag = true;
         }
         return flag;
     }

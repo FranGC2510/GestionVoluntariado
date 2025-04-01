@@ -4,7 +4,6 @@ import dataAccess.XMLManager;
 import model.Usuario;
 import model.UsuariosLista;
 import utils.PasswordUtilidades;
-import views.VistaConsola;
 
 public class UsuarioController {
     private UsuariosLista usuarios;
