@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement (name = "creador")
 public class Creador extends Usuario{
-    private String ONG;
+    private String ong;
 
     /**
      * Constructor vacío requerido por JAXB para la deserialización.
@@ -23,11 +23,11 @@ public class Creador extends Usuario{
      * @param usuario  Nombre de usuario del creador.
      * @param password Contraseña del creador.
      * @param email    Dirección de correo electrónico del creador.
-     * @param ONG      Nombre de la organización no gubernamental a la que pertenece.
+     * @param ong      Nombre de la organización no gubernamental a la que pertenece.
      */
-    public Creador(String nombre, String usuario, String password, String email, String ONG) {
+    public Creador(String nombre, String usuario, String password, String email, String ong) {
         super(nombre, usuario, password, email);
-        this.ONG = ONG;
+        this.ong = ong;
     }
 
     /**
@@ -35,16 +35,16 @@ public class Creador extends Usuario{
      * @return Nombre de la ONG.
      */
     @XmlElement (name = "ONG")
-    public String getONG() {
-        return ONG;
+    public String getOng() {
+        return ong;
     }
 
     /**
      * Establece el nombre de la ONG a la que pertenece el creador.
-     * @param ONG Nombre de la ONG.
+     * @param ong Nombre de la ONG.
      */
-    public void setONG(String ONG) {
-        this.ONG = ONG;
+    public void setOng(String ong) {
+        this.ong = ong;
     }
 
     /**
@@ -55,6 +55,6 @@ public class Creador extends Usuario{
     public String toString() {
         return super.toString() +
                 "\n\tRol -> " + getClass().getSimpleName() +
-                "\n\tONG -> " + this.ONG;
+                "\n\tONG -> " + this.ong;
     }
 }

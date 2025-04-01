@@ -49,19 +49,40 @@ public class UsuarioController {
         }
         return resultado;
     }
-
-    public boolean iniciarSesion(){
+    /**
+     * Intenta iniciar sesión con las credenciales proporcionadas.
+     * Solo permite iniciar sesión si no hay una sesión activa actualmente.
+     *
+     * @param usuario Nombre de usuario para iniciar sesión
+     * @param password Contraseña del usuario
+     * @return true si el inicio de sesión fue exitoso, false en caso contrario
+     */
+    public boolean iniciarSesion(String usuario, String password){
         boolean resultado = false;
         SesionUsuario sesion=SesionUsuario.getInstance();
-        String usuario=VistaConsola.pideUsuario();
-        String password=VistaConsola.pidePassword();
 
-        for(Usuario u: usuarios.getUsuarios()){
-            if(u.getUsuario()!=null && u.getPassword()!=null && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
-                sesion.iniciarSesion(u);
-                resultado = true;
-                break;
+        if(sesion.getUsuarioActual() == null && usuario != null && password != null) {
+            for(Usuario u: usuarios.getUsuarios()){
+                if(u.getUsuario()!=null && u.getPassword()!=null && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
+                    sesion.iniciarSesion(u);
+                    resultado = true;
+                    break;
+                }
             }
+        }
+        return resultado;
+    }
+
+    /**
+     * Cierra la sesión del usuario actual.
+     * @return true si se cerró la sesión correctamente, false si no había sesión iniciada.
+     */
+    public boolean cerrarSesion() {
+        boolean resultado = false;
+        SesionUsuario sesion = SesionUsuario.getInstance();
+        if (sesion.getUsuarioActual() != null) {
+            sesion.cerrarSesion();
+            resultado = true;
         }
         return resultado;
     }

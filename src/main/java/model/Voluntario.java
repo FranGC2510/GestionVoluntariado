@@ -27,7 +27,7 @@ public class Voluntario extends Usuario{
      */
     public Voluntario(String nombre, String usuario, String password, String email) {
         super(nombre, usuario, password, email);
-        this.puntos = puntos;
+        this.puntos = 0;
     }
 
     /**

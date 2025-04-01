@@ -1,7 +1,5 @@
 package model;
 import exceptions.EmailInvalidoException;
-import exceptions.PasswordInvalidaException;
-import utils.PasswordUtilidades;
 import utils.UtilidadesGenerales;
 
 import javax.xml.bind.annotation.*;
