@@ -3,8 +3,15 @@
     <creador>
         <email>fran@gmail.com</email>
         <nombre>Fran Garcia</nombre>
-        <password>$2a$10$aNeYeLq7vwdKwhvjh1HDEeXiNbjj3JyQwTOfl4a2UKyH7bjlDM0HS</password>
+        <password>$2a$10$UxH1NVqpwhU8MIZIRerrteWbgAp09896Q26.eL0ZqSI7NJ2YnI0jq</password>
         <nombreUsuario>fran</nombreUsuario>
-        <ONG>ONG</ONG>
+        <ONG>ong</ONG>
     </creador>
+    <voluntario>
+        <email>dani@gmail.com</email>
+        <nombre>Dani</nombre>
+        <password>$2a$10$lzEjiYOqFGTssyoSKcSN0e2J0.nGW/sYll6Ct.Ue8wAUyw6joErs6</password>
+        <nombreUsuario>dani</nombreUsuario>
+        <puntosTotales>0</puntosTotales>
+    </voluntario>
 </Usuarios>

@@ -24,6 +24,9 @@ public class ActividadLista {
      */
     public ActividadLista() {}
 
+    public ActividadLista(List<Actividad> actividades) {
+        this.actividades = actividades;
+    }
     /**
      * Obtiene la lista de actividades almacenadas.
      * @return Un conjunto de objetos de tipo {@link Actividad}
