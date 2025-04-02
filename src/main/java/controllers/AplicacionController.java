@@ -35,7 +35,8 @@ public class AplicacionController {
             int opcion = VistaMenu.menuPrincipal();
             switch (opcion) {
                 case 1: // Iniciar Sesión
-                    if (usuarioController.iniciarSesion(VistaUsuario.pideUsuario(), VistaUsuario.pidePassword())) {
+                    int tipo=VistaMenu.tipoInicio();
+                    if (usuarioController.iniciarSesion(VistaUsuario.pideUsuario(), VistaUsuario.pidePassword(),tipo)) {
                         usuarioActual = SesionUsuario.getInstance().getUsuarioActual();
                         if (usuarioActual instanceof Creador) { // Si es creador
                             gestionarMenuCreador();
@@ -153,9 +154,11 @@ public class AplicacionController {
                 case 4: // Eliminar iniciativa
                     if (iniciativa.getActividades().isEmpty()) {
                         iniciativaController.eliminar(iniciativa);
+                        VistaComun.mostrarMensaje("La iniciativa ha sido eliminada correctamente.");
                     } else {
                         VistaComun.mostrarMensaje("La iniciativa no se puede eliminar, tiene actividades asignadas.");
                     }
+                    continuar = false;
                     break;
                 case 5: // Volver al menú principal
                     continuar = false;
@@ -164,6 +167,11 @@ public class AplicacionController {
         }
     }
 
+    /**
+     * Gestiona el menú principal del voluntario.
+     * Muestra las opciones disponibles para el voluntario y procesa sus selecciones,
+     * incluyendo ver actividades disponibles, ver actividades asignadas y cerrar sesión.
+     */
     private void gestionarMenuVoluntario() {
         boolean continuar = true;
         while (continuar) {
@@ -184,6 +192,11 @@ public class AplicacionController {
         }
     }
 
+    /**
+     * Muestra las actividades disponibles para los voluntarios.
+     * Lista todas las iniciativas y sus actividades que están en estado PENDIENTE o EN_CURSO,
+     * permitiendo a los voluntarios unirse a las actividades que les interesen.
+     */
     private void actividadesDisponibles() {
         List<Iniciativa> iniciativas = iniciativaController.listar();
         boolean hayActividades = false;
@@ -258,6 +271,12 @@ public class AplicacionController {
             }
         }
     }
+
+    /**
+     * Muestra las actividades a las que está asignado el voluntario actual.
+     * Recorre todas las iniciativas y muestra aquellas actividades donde el voluntario
+     * actual está participando, incluyendo su estado y otros detalles relevantes.
+     */
     private void actividadesAsignadas() {
         List<Iniciativa> iniciativas = iniciativaController.listar();
         boolean hayActividades = false;

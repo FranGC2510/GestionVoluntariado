@@ -52,6 +52,25 @@ public class VistaMenu {
     }
 
     /**
+     * Muestra las opciones de inicio sesión disponibles para el usuario y devuelve la opción seleccionada.
+     * @return La opción seleccionada por el usuario para el tipo de registro:
+     *         1 - Iniciar sesión como creador.
+     *         2 - Iniciar sesión como voluntario.
+     */
+    public static int tipoInicio() {
+        String menuRegistrar = """
+                ===================================================
+                Selecciona cómo deseas iniciar sesión:
+                ===================================================
+                
+                          1. Iniciar sesión como creador
+                          2. Iniciar sesión como voluntario
+                ---------------------------------------------------
+                """;
+
+        return UtilidadesGenerales.pideEntero(menuRegistrar,1,2);
+    }
+    /**
      * Muestra las opciones de registro disponibles para el usuario y devuelve la opción seleccionada.
      * @return La opción seleccionada por el usuario para el tipo de registro:
      *         1 - Registrarse como creador.
