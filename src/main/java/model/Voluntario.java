@@ -57,4 +57,12 @@ public class Voluntario extends Usuario{
                 "\n\tRol -> " + getClass().getSimpleName() +
                 "\n\tPuntos -> " + this.puntos;
     }
+
+    /**
+     * Suma una cantidad de puntos a los puntos actuales del voluntario.
+     * @param puntos: La cantidad de puntos que se deben sumar al total actual.
+     */
+    public void sumarPuntos(int puntos) {
+        this.puntos += puntos;
+    }
 }

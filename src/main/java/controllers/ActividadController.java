@@ -4,6 +4,7 @@ import dataAccess.XMLManager;
 import exceptions.ActividadExisteException;
 import exceptions.ActividadNoEncontradaException;
 import exceptions.UsuarioNoEncontradoException;
+import interfaces.Estado;
 import interfaces.Gestionable;
 import model.Actividad;
 import model.ActividadLista;
@@ -88,7 +89,13 @@ public class ActividadController implements Gestionable <Actividad> {
         return new ArrayList<>(actividades.getActividades());
     }
 
-
+    /**
+     * Agrega un voluntario a una actividad especificada por su ID.
+     * Si la actividad o el voluntario no existen, lanza una excepción.
+     * Si ambos existen, el voluntario es agregado a la actividad y los cambios se guardan en un archivo XML.
+     * @param idActividad El ID de la actividad a la que se desea agregar el voluntario.
+     * @param nombreUsuario El nombre del voluntario que se quiere agregar a la actividad.
+     */
     public void agregarVoluntarioActividad(String idActividad, String nombreUsuario) {
         Actividad actividad = buscarPorId(idActividad);
         if (actividad == null) {
@@ -109,5 +116,36 @@ public class ActividadController implements Gestionable <Actividad> {
         }
     }
 
-}
 
+    /**
+     *Este método asigna 100 puntos a cada voluntario de la actividad.
+     * @param actividad: La actividad cuyos voluntarios recibirán los puntos.
+     */
+    private void asignarPuntos(Actividad actividad) {
+        for (Voluntario voluntario : actividad.getVoluntarios()) {
+            voluntario.sumarPuntos(100);
+        }
+        XMLManager.writeXML(actividades, "actividades.xml");
+    }
+
+    /**
+     * Cambia el estado de una actividad especificada por su ID.
+     * Si el estado es 'FINALIZADA', se asignan puntos a los voluntarios de la actividad.
+     * @param idActividad: Recibe el ID de la actividad que queremos modificarle el Estado.
+     * @param nuevoEstado: Recibe el nuevo Estado que queremos para la actividad.
+     */
+    public void cambiarEstado(String idActividad, Estado nuevoEstado) {
+        Actividad actividad = buscarPorId(idActividad);
+        if (actividad == null) {
+            throw new ActividadNoEncontradaException("Actividad con ID " + idActividad + " no encontrada.");
+        }
+
+        actividad.setEstado(nuevoEstado);
+
+        if (nuevoEstado == Estado.FINALIZADA) {
+            asignarPuntos(actividad);
+        }
+
+        XMLManager.writeXML(actividades, "actividades.xml");
+    }
+}
