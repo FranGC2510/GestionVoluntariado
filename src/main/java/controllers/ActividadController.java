@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Controlador que gestiona las operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * relacionadas con las actividades en el sistema. Implementa la interfaz Gestionable
+ * para proporcionar operaciones estándar de gestión de actividades.
+ */
 public class ActividadController implements Gestionable <Actividad> {
     private ActividadLista actividades;
     /**
@@ -102,6 +107,16 @@ public class ActividadController implements Gestionable <Actividad> {
         return new ArrayList<>(actividades.getActividades());
     }
 
+    /**
+     * Añade un voluntario a una actividad específica.
+     * Si el voluntario no está ya asignado a la actividad, se añade y se actualiza
+     * la persistencia XML.
+     *
+     * @param actividad La actividad a la que se añadirá el voluntario
+     * @param voluntario El voluntario que se añadirá a la actividad
+     * @throws IllegalArgumentException Si la actividad o el voluntario son nulos
+     * @return true si el voluntario fue añadido exitosamente, false si ya estaba asignado
+     */
     public boolean addVoluntario(Actividad actividad, Voluntario voluntario) {
         boolean flag = false;
         if (actividad == null) {

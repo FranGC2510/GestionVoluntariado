@@ -25,6 +25,9 @@ public class Iniciativa {
     @XmlElement (name = "actividad")
     private List<Actividad> actividades;
 
+    /**
+     * Constructor vacío requerido por JAXB para la deserialización.
+     */
     public Iniciativa() {}
     /**
      * Constructor que inicializa una nueva iniciativa con todos sus atributos.

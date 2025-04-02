@@ -1,9 +1,7 @@
 package controllers;
 
 import dataAccess.XMLManager;
-import model.Actividad;
-import model.Usuario;
-import model.UsuariosLista;
+import model.*;
 import utils.PasswordUtilidades;
 
 public class UsuarioController {
@@ -39,17 +37,26 @@ public class UsuarioController {
      * @param password Contraseña del usuario
      * @return true si el inicio de sesión fue exitoso, false en caso contrario
      */
-    public boolean iniciarSesion(String usuario, String password){
+    public boolean iniciarSesion(String usuario, String password, int tipo){
         boolean resultado = false;
         SesionUsuario sesion=SesionUsuario.getInstance();
 
         if(sesion.getUsuarioActual() == null && usuario != null && password != null) {
             for(Usuario u: usuarios.getUsuarios()){
-                if(u.getUsuario()!=null && u.getPassword()!=null && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
-                    sesion.iniciarSesion(u);
-                    resultado = true;
-                    break;
+                if(tipo==1){
+                    if(u.getUsuario()!=null && u.getPassword()!=null && u.getClass().equals(Creador.class) && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
+                        sesion.iniciarSesion(u);
+                        resultado = true;
+                        break;
+                    }
+                }else{
+                    if(u.getUsuario()!=null && u.getPassword()!=null && u.getClass().equals(Voluntario.class) && u.getUsuario().equals(usuario) && PasswordUtilidades.checkPassword(password,u.getPassword())){
+                        sesion.iniciarSesion(u);
+                        resultado = true;
+                        break;
+                    }
                 }
+
             }
         }
         return resultado;

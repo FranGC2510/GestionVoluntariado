@@ -47,10 +47,20 @@ public class IniciativaLista {
         return this.iniciativas.add(iniciativa);
     }
 
+    /**
+     * Elimina una iniciativa de la lista.
+     * @param iniciativa La iniciativa a eliminar.
+     * @return true si la iniciativa fue eliminada, false si no existía.
+     */
     public boolean removeIniciativa(Iniciativa iniciativa) {
         return this.iniciativas.remove(iniciativa);
     }
 
+    /**
+     * Verifica si una iniciativa existe en la lista.
+     * @param iniciativa La iniciativa a buscar.
+     * @return true si la iniciativa existe, false en caso contrario.
+     */
     public boolean containsIniciativa(Iniciativa iniciativa) {
         return this.iniciativas.contains(iniciativa);
     }

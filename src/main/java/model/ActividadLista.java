@@ -24,6 +24,12 @@ public class ActividadLista {
      */
     public ActividadLista() {}
 
+    /**
+     * Constructor que inicializa la lista con un conjunto existente de actividades.
+     * Realiza una copia defensiva de la lista proporcionada para mantener la encapsulación.
+     *
+     * @param actividades Lista inicial de actividades a almacenar
+     */
     public ActividadLista(List<Actividad> actividades) {
         this.actividades = actividades;
     }

@@ -14,4 +14,11 @@
         <nombreUsuario>fran</nombreUsuario>
         <ONG>ong</ONG>
     </creador>
+    <voluntario>
+        <email>fran@gmail.com</email>
+        <nombre>Fran Garcia</nombre>
+        <password>$2a$10$Zir9WDAD0csD/5z43AmXY.3apkOuUjAOsP.mGqpGf7nhh3TZHnppO</password>
+        <nombreUsuario>fran</nombreUsuario>
+        <puntosTotales>0</puntosTotales>
+    </voluntario>
 </Usuarios>

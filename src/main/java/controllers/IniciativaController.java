@@ -1,18 +1,14 @@
 package controllers;
 
 import dataAccess.XMLManager;
-import exceptions.ActividadExisteException;
 import interfaces.Gestionable;
 import exceptions.IniciativaNoEncontradaException;
 import exceptions.IniciativaExisteException;
 import model.Actividad;
 import model.Iniciativa;
 import model.IniciativaLista;
-import model.UsuariosLista;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 // Clase que implementa la gestion de iniciativas mediante operaciones CRUD
@@ -99,11 +95,29 @@ public class IniciativaController implements Gestionable<Iniciativa> {
         return new ArrayList<>(iniciativas.getIniciativas()); // Devuelve una copia para evitar modificaciones externas
     }
 
+    /**
+     * Obtiene todas las actividades asociadas a una iniciativa específica.
+     *
+     * @param id El identificador único de la iniciativa
+     * @return Lista de actividades asociadas a la iniciativa
+     * @throws IllegalArgumentException si el ID es null
+     * @throws IniciativaNoEncontradaException si no se encuentra la iniciativa
+     */
     public List<Actividad> listarActividadesByIniciativa(String id) {
         Iniciativa iniciativa=buscarPorId(id);
         return iniciativa.getActividades();
     }
 
+    /**
+     * Añade una nueva actividad a una iniciativa existente.
+     * La operación actualiza automáticamente la persistencia XML.
+     *
+     * @param id El identificador de la iniciativa a la que se añadirá la actividad
+     * @param actividad La actividad a añadir
+     * @return true si la actividad fue añadida exitosamente, false en caso contrario
+     * @throws IllegalArgumentException si el ID o la actividad son null
+     * @throws IniciativaNoEncontradaException si no se encuentra la iniciativa
+     */
     public boolean addActividad(String id,Actividad actividad) {
         boolean flag = false;
         Iniciativa iniciativa=buscarPorId(id);
@@ -115,6 +129,16 @@ public class IniciativaController implements Gestionable<Iniciativa> {
         return flag;
     }
 
+    /**
+     * Elimina una actividad de una iniciativa existente.
+     * La operación actualiza automáticamente la persistencia XML.
+     *
+     * @param id El identificador de la iniciativa de la que se eliminará la actividad
+     * @param actividad La actividad a eliminar
+     * @return true si la actividad fue eliminada exitosamente, false en caso contrario
+     * @throws IllegalArgumentException si el ID o la actividad son null
+     * @throws IniciativaNoEncontradaException si no se encuentra la iniciativa
+     */
     public boolean removeActividad(String id,Actividad actividad) {
         boolean flag = false;
         Iniciativa iniciativa=buscarPorId(id);

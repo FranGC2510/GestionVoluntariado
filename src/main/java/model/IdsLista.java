@@ -38,6 +38,13 @@ public class IdsLista {
         return this.ids.add(id);
     }
 
+    /**
+     * Verifica si un identificador específico existe en la lista.
+     *
+     * @param id El identificador a buscar
+     * @return true si el identificador existe en la lista, false en caso contrario
+     * @throws IllegalArgumentException si el id es null
+     */
     public boolean containsIds(String id) {
         return this.ids.contains(id);
     }

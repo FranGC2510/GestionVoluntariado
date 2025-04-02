@@ -38,6 +38,9 @@ public class Actividad {
     @XmlElement(name = "voluntario")
     private HashSet<Voluntario> voluntarios;
 
+    /**
+     * Constructor vacío requerido por JAXB para la deserialización XML.
+     */
     public Actividad() {}
     /**
      * Constructor que inicializa una nueva actividad con todos sus atributos.
