@@ -35,6 +35,9 @@ public class SesionUsuario {
     public Usuario getUsuarioActual() {
         return this.usuarioActual;
     }
+    public void setUsuarioActual(Usuario usuarioActual) {
+        this.usuarioActual = usuarioActual;
+    }
 
     /**
      * Inicia la sesión para un usuario específico.

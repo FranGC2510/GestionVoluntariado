@@ -2,9 +2,11 @@ package model;
 
 import exceptions.FechaNoValidaException;
 import interfaces.Estado;
+import utils.AdaptadorLocalDateXml;
 import utils.GeneradorID;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -23,8 +25,10 @@ public class Actividad {
     @XmlElement(name = "descripcion")
     private String descripcion;
     @XmlElement(name = "fechaInicio")
+    @XmlJavaTypeAdapter(AdaptadorLocalDateXml.class)
     private LocalDate fechaInicio;
     @XmlElement(name = "fechaFin")
+    @XmlJavaTypeAdapter(AdaptadorLocalDateXml.class)
     private LocalDate fechaFin;
     @XmlElement(name = "estado")
     private Estado estado;
@@ -172,7 +176,7 @@ public class Actividad {
      * @return La lista de voluntarios.
      */
     public HashSet<Voluntario> getVoluntarios() {
-        return this.voluntarios = new HashSet<>(voluntarios);
+        return this.voluntarios;
     }
 
     /**

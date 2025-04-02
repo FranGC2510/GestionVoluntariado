@@ -54,8 +54,8 @@ public class VistaActividad {
      * Solicita al usuario que introduzca el ID de una actividad.
      * @return El ID de la actividad introducido por el usuario.
      */
-    public static String pideIdActividad() {
-        System.out.print("Introduzca el ID de la actividad que desea eliminar: ");
+    public static String pideIdActividad(String msn) {
+        System.out.print(msn);
         return sc.nextLine();
     }
 

@@ -124,4 +124,38 @@ public abstract class Usuario {
                 "\n\tContraseña-> " + this.password +
                 "\n\tEmail-> " + this.email;
     }
+
+    /**
+     * Compara este usuario con otro objeto para determinar si son iguales.
+     * Dos usuarios se consideran iguales si tienen el mismo nombre de usuario.
+     * @param o El objeto a comparar con este usuario
+     * @return true si los usuarios tienen el mismo nombre de usuario, false en caso contrario
+     */
+    @Override
+    public boolean equals(Object o) {
+        boolean resultado = false;
+        if (this == o) {
+            resultado = true;
+        } else if (o != null && getClass() == o.getClass()) {
+            Usuario usu = (Usuario) o;
+            if (usuario != null) {
+                resultado = usuario.equals(usu.usuario);
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Genera un código hash para este usuario basado en su nombre de usuario.
+     *
+     * @return El código hash generado
+     */
+    @Override
+    public int hashCode() {
+        int resultado = 0;
+        if (usuario != null) {
+            resultado = usuario.hashCode();
+        }
+        return resultado;
+    }
 }

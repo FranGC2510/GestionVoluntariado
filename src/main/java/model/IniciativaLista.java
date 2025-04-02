@@ -27,7 +27,7 @@ public class IniciativaLista {
      * @return Un conjunto de objetos de tipo {@link Iniciativa}
      */
     public List<Iniciativa> getIniciativas() {
-        return new ArrayList<>(iniciativas);
+        return iniciativas;
     }
 
     /**

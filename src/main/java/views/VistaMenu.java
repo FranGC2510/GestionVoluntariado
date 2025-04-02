@@ -135,7 +135,7 @@ public class VistaMenu {
 
                 ---------------------------------------------------
                   1. Ver actividades disponibles
-                  2. Ver mis iniciativas
+                  2. Ver mis actividades
                   3. Cerrar sesión
                 ---------------------------------------------------
                 """;

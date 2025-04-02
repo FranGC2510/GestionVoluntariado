@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Iniciativas>
     <iniciativa>
-        <id>bc3</id>
-        <nombre>Reforestar bosques</nombre>
-        <descripcion>Reforestacion de los bosques de andalucia</descripcion>
+        <id>ac4</id>
+        <nombre>dsfg</nombre>
+        <descripcion>adg</descripcion>
         <creador>Fran Garcia</creador>
-        <actividades/>
+        <actividades>
+            <actividad>
+                <id>063</id>
+                <nombre>seg</nombre>
+                <descripcion>seG</descripcion>
+                <fechaInicio>10/10/2025</fechaInicio>
+                <fechaFin>30/10/2025</fechaFin>
+                <estado>PENDIENTE</estado>
+                <voluntarios>
+                    <voluntario>
+                        <email>dani@gmail.com</email>
+                        <nombre>Dani</nombre>
+                        <password>$2a$10$lzEjiYOqFGTssyoSKcSN0e2J0.nGW/sYll6Ct.Ue8wAUyw6joErs6</password>
+                        <nombreUsuario>dani</nombreUsuario>
+                        <puntosTotales>0</puntosTotales>
+                    </voluntario>
+                </voluntarios>
+            </actividad>
+        </actividades>
     </iniciativa>
 </Iniciativas>

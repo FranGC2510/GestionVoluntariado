@@ -135,4 +135,38 @@ public class Iniciativa {
         }
         return resultado;
     }
+
+    /**
+     * Compara esta iniciativa con otro objeto para determinar si son iguales.
+     * Dos iniciativas se consideran iguales si tienen el mismo ID.
+     * @param o El objeto a comparar con esta iniciativa
+     * @return true si las iniciativas tienen el mismo ID, false en caso contrario
+     */
+    @Override
+    public boolean equals(Object o) {
+        boolean resultado = false;
+        if (this == o) {
+            resultado = true;
+        } else if (o != null && getClass() == o.getClass()) {
+            Iniciativa ini = (Iniciativa) o;
+            if (id != null) {
+                resultado = id.equals(ini.id);
+            }
+        }
+        return resultado;
+    }
+
+    /**
+     * Genera un código hash para esta iniciativa basado en su ID.
+     *
+     * @return El código hash generado
+     */
+    @Override
+    public int hashCode() {
+        int resultado = 0;
+        if (id != null) {
+            resultado = id.hashCode();
+        }
+        return resultado;
+    }
 }

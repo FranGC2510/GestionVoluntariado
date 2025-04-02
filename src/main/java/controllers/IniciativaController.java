@@ -40,9 +40,6 @@ public class IniciativaController implements Gestionable<Iniciativa> {
     public boolean crear(Iniciativa iniciativa) {
         boolean flag = false;
         if(iniciativa!=null){
-            if(iniciativas.containsIniciativa(iniciativa)){
-                throw new IniciativaExisteException("Iniciativa con ID " + iniciativa.getId() + " ya existe.");
-            }
             if(iniciativas.addIniciativa(iniciativa)){
                 XMLManager.writeXML(iniciativas,"iniciativas.xml");
                 flag = true;
@@ -60,14 +57,14 @@ public class IniciativaController implements Gestionable<Iniciativa> {
     @Override
     public Iniciativa buscarPorId(String id) {
         Iniciativa iniciativaEncontrada = null;
+        if(id==null){
+            throw new IllegalArgumentException("El ID no puede ser nulo");
+        }
         for(Iniciativa ini : iniciativas.getIniciativas()) {
             if(ini.getId().equals(id)) {
                 iniciativaEncontrada = ini;
                 break;
             }
-        }
-        if(iniciativaEncontrada == null) {
-            throw new IniciativaNoEncontradaException("Iniciativa con ID " + id + " no ha sido encontrada.");
         }
         return iniciativaEncontrada;
     }
@@ -126,6 +123,34 @@ public class IniciativaController implements Gestionable<Iniciativa> {
             XMLManager.writeXML(iniciativas,"iniciativas.xml");
             flag = true;
         }
+        return flag;
+    }
+    /**
+     * Actualiza una iniciativa existente.
+     * @param iniciativa La iniciativa a actualizar
+     * @return true si la actualización fue exitosa, false en caso contrario
+     * @throws IniciativaNoEncontradaException si la iniciativa no existe
+     */
+    public boolean actualizar(Iniciativa iniciativa) {
+        boolean flag = false;
+        if(iniciativa == null) {
+            throw new IllegalArgumentException("La iniciativa no puede ser nula");
+        }
+        Iniciativa antigua = null;
+        for (Iniciativa i : iniciativas.getIniciativas()) {
+            if (i.getId().equals(iniciativa.getId())) {
+                antigua = i;
+                break;
+            }
+        }
+
+        if (antigua != null) {
+            iniciativas.removeIniciativa(antigua);
+            iniciativas.addIniciativa(iniciativa);
+            XMLManager.writeXML(iniciativas,"iniciativas.xml");
+            return true;
+        }
+
         return flag;
     }
 }

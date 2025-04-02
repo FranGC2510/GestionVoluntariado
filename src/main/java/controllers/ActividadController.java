@@ -6,8 +6,10 @@ import exceptions.ActividadNoEncontradaException;
 import interfaces.Gestionable;
 import model.Actividad;
 import model.ActividadLista;
+import model.Voluntario;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ActividadController implements Gestionable <Actividad> {
@@ -98,5 +100,22 @@ public class ActividadController implements Gestionable <Actividad> {
         return new ArrayList<>(actividades.getActividades());
     }
 
+    public boolean addVoluntario(Actividad actividad, Voluntario voluntario) {
+        boolean flag = false;
+        if (actividad == null) {
+            throw new IllegalArgumentException("La actividad no puede ser nula");
+        }
+        if (voluntario == null) {
+            throw new IllegalArgumentException("El voluntario no puede ser nulo");
+        }
+        HashSet<Voluntario> voluntarios = actividad.getVoluntarios();
+        if(!voluntarios.contains(voluntario)){
+            voluntarios.add(voluntario);
+            actividad.setVoluntarios(voluntarios);
+            XMLManager.writeXML(actividades, "actividades.xml");
+            flag = true;
+        }
+        return flag;
+    }
 }
 
