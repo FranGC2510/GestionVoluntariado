@@ -48,6 +48,14 @@ public class Voluntario extends Usuario{
     }
 
     /**
+     * Suma una cantidad de puntos al total del voluntario.
+     * @param cantidad Cantidad de puntos a sumar.
+     */
+    public void sumarPuntos(int cantidad) {
+        this.puntos += cantidad;
+    }
+
+    /**
      * Representación en cadena del objeto voluntario.
      * @return Cadena con la información del voluntario y sus puntos acumulados.
      */

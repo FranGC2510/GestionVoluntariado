@@ -3,9 +3,11 @@ package controllers;
 import dataAccess.XMLManager;
 import exceptions.ActividadExisteException;
 import exceptions.ActividadNoEncontradaException;
+import exceptions.IniciativaNoEncontradaException;
 import interfaces.Gestionable;
 import model.Actividad;
 import model.ActividadLista;
+import model.Iniciativa;
 import model.Voluntario;
 
 import java.util.ArrayList;
@@ -115,6 +117,34 @@ public class ActividadController implements Gestionable <Actividad> {
             XMLManager.writeXML(actividades, "actividades.xml");
             flag = true;
         }
+        return flag;
+    }
+
+    /**
+     * Actualiza una actividad existente.
+     * @param actividad La actividad a actualizar
+     * @return true si la actualización fue exitosa, false en caso contrario
+     */
+    public boolean actualizar(Actividad actividad) {
+        boolean flag = false;
+        if(actividad == null) {
+            throw new IllegalArgumentException("La actividad no puede ser nula");
+        }
+        Actividad antigua = null;
+        for (Actividad i : actividades.getActividades()) {
+            if (i.getId().equals(actividad.getId())) {
+                antigua = i;
+                break;
+            }
+        }
+
+        if (antigua != null) {
+            actividades.removeActividad(antigua);
+            actividades.addActividad(actividad);
+            XMLManager.writeXML(actividades,"actividades.xml");
+            return true;
+        }
+
         return flag;
     }
 }

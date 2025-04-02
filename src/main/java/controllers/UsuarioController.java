@@ -1,6 +1,7 @@
 package controllers;
 
 import dataAccess.XMLManager;
+import model.Actividad;
 import model.Usuario;
 import model.UsuariosLista;
 import utils.PasswordUtilidades;
@@ -16,24 +17,6 @@ public class UsuarioController {
             usuarios = new UsuariosLista();
         }
     }
-    /*
-    /**
-     * Determina el tipo de usuario en función de la clase a la que pertenece.
-     * @param usuario El objeto {@link Usuario} cuyo tipo se desea determinar.
-     * @return El tipo de usuario:
-     *         1 - Si el usuario es de tipo {@link Creador},
-     *         2 - Si el usuario es de tipo {@link Voluntario},
-     *
-    public int tipoUsuario(Usuario usuario) {
-        int tipo = 0;
-        if(usuario.getClass()== Creador.class){
-            tipo = 1;
-        } else if(usuario.getClass()== Voluntario.class){
-            tipo = 2;
-        }
-        return tipo;
-    }
-    */
 
     /**
      * Añade un nuevo usuario a la lista de usuarios y guarda los datos en un archivo XML.
@@ -84,5 +67,33 @@ public class UsuarioController {
             resultado = true;
         }
         return resultado;
+    }
+
+    /**
+     * Actualiza una usuario existente.
+     * @param usuario La usuario a actualizar
+     * @return true si la actualización fue exitosa, false en caso contrario
+     */
+    public boolean actualizar(Usuario usuario) {
+        boolean flag = false;
+        if(usuario == null) {
+            throw new IllegalArgumentException("El usuario no puede ser nulo");
+        }
+        Usuario antiguo = null;
+        for (Usuario i : usuarios.getUsuarios()) {
+            if (i.getUsuario().equals(usuario.getUsuario())) {
+                antiguo = i;
+                break;
+            }
+        }
+
+        if (antiguo != null) {
+            usuarios.removeUsuario(antiguo);
+            usuarios.addUsuario(usuario);
+            XMLManager.writeXML(usuarios,"usuarios.xml");
+            return true;
+        }
+
+        return flag;
     }
 }

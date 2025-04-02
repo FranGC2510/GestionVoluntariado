@@ -51,6 +51,15 @@ public class UsuariosLista {
     }
 
     /**
+     * Elimina un usuario de la lista.
+     * @param usuario El usuario a eliminar.
+     * @return true si el usuario fue eliminado, false si no existía.
+     */
+    public boolean removeUsuario(Usuario usuario) {
+        return this.usuarios.remove(usuario);
+    }
+
+    /**
      * Devuelve una representación en cadena de la lista de usuarios.
      * @return Una cadena con la información de los usuarios almacenados.
      */
