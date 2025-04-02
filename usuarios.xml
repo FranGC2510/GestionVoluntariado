@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Usuarios>
+    <voluntario>
+        <email>dani@gmail.com</email>
+        <nombre>Dani</nombre>
+        <password>$2a$10$lzEjiYOqFGTssyoSKcSN0e2J0.nGW/sYll6Ct.Ue8wAUyw6joErs6</password>
+        <nombreUsuario>dani</nombreUsuario>
+        <puntosTotales>100</puntosTotales>
+    </voluntario>
     <creador>
         <email>fran@gmail.com</email>
         <nombre>Fran Garcia</nombre>
@@ -7,11 +14,4 @@
         <nombreUsuario>fran</nombreUsuario>
         <ONG>ong</ONG>
     </creador>
-    <voluntario>
-        <email>dani@gmail.com</email>
-        <nombre>Dani</nombre>
-        <password>$2a$10$lzEjiYOqFGTssyoSKcSN0e2J0.nGW/sYll6Ct.Ue8wAUyw6joErs6</password>
-        <nombreUsuario>dani</nombreUsuario>
-        <puntosTotales>0</puntosTotales>
-    </voluntario>
 </Usuarios>

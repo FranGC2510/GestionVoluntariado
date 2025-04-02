@@ -172,7 +172,9 @@ public class AplicacionController {
                 case 1 :// Ver actividades disponibles (PENDIENTES o EN_CURSO)
                     actividadesDisponibles();
                     break;
-                //case 2 -> actividadesAsignadas(); // Ver mis actividades asignadas
+                case 2 :// Ver mis actividades asignadas
+                    actividadesAsignadas();
+                    break;
                 case 3 :// Cerrar sesión
                     usuarioController.cerrarSesion();
                     usuarioActual = null;
@@ -256,42 +258,83 @@ public class AplicacionController {
             }
         }
     }
-    /*
     private void actividadesAsignadas() {
         List<Iniciativa> iniciativas = iniciativaController.listar();
         boolean hayActividades = false;
+        Voluntario voluntario = (Voluntario) SesionUsuario.getInstance().getUsuarioActual();
+
         if (iniciativas != null && !iniciativas.isEmpty()) {
-            VistaComun.mostrarMensaje("\nMis actividades:");
+            VistaComun.mostrarMensaje("\nTus actividades asignadas:");
             for (Iniciativa iniciativa : iniciativas) {
                 List<Actividad> actividades = iniciativa.getActividades();
                 if (actividades != null && !actividades.isEmpty()) {
-                    boolean mostrarIniciativa = false;
-                    String misActividades = "";
-
                     for (Actividad actividad : actividades) {
-                        if (actividad.getVoluntarios() != null &&
-                                actividad.getVoluntarios().contains((Voluntario) SesionUsuario.getInstance().getUsuarioActual())) {
-                            if (!mostrarIniciativa) {
-                                misActividades = "\nIniciativa: " +
-                                        iniciativa.getNombre() + "\n";
-                                mostrarIniciativa = true;
-                            }
-                            misActividades += "- " + actividad.getNombre() +
-                                    " (Estado: " + actividad.getEstado() +
-                                    ")\n";
+                        if (actividad.getVoluntarios().contains(voluntario)) {
+                            VistaActividad.mostrarDetalleActividad(actividad, iniciativa);
                             hayActividades = true;
                         }
                     }
-                    if (mostrarIniciativa) {
-                        VistaComun.mostrarMensaje(misActividades);
-                    }
                 }
             }
-            if (!hayActividades) {
+
+            if (hayActividades) {
+                modificarEstadoActividad(iniciativas);
+            }else{
                 VistaComun.mostrarMensaje("No tienes actividades asignadas.");
             }
         } else {
-            VistaComun.mostrarMensaje("No hay iniciativas ni actividades disponibles.");
+            VistaComun.mostrarMensaje("No hay iniciativas registradas.");
         }
-    }*/
+    }
+    private void modificarEstadoActividad(List<Iniciativa> iniciativas) {
+        String idActividad = VistaActividad.pideIdActividad("\n¿Desea modificar el estado de alguna actividad? Introduzca el ID (o 0 para cancelar):");
+        if (!idActividad.equals("0")) {
+            Actividad actividad = actividadController.buscarPorId(idActividad);
+            Voluntario voluntario = (Voluntario) SesionUsuario.getInstance().getUsuarioActual();
+
+            if (actividad != null && actividad.getVoluntarios().contains(voluntario)) {
+                Estado nuevoEstado = VistaActividad.pideEstado();
+                if (nuevoEstado != null) {
+                    boolean actividadActualizada = false;
+                    try {
+                        actividad.setEstado(nuevoEstado);
+                        if (nuevoEstado == Estado.FINALIZADA) {
+                            String comentario = VistaActividad.pideComentarioFinalizacion();
+                            actividad.setComentario(comentario);
+                            for (Voluntario vol : actividad.getVoluntarios()) {
+                                vol.sumarPuntos(100);
+                                usuarioController.actualizar(vol);
+                            }
+                            VistaComun.mostrarMensaje("Se han sumado 100 puntos a todos los voluntarios de la actividad. ");
+                        }
+                        actividadController.actualizar(actividad);
+                        for (Iniciativa iniciativa : iniciativas) {
+                            List<Actividad> actividades = iniciativa.getActividades();
+                            for (int i = 0; i < actividades.size(); i++) {
+                                if (actividades.get(i).getId().equals(idActividad)) {
+                                    actividades.set(i, actividad);
+                                    iniciativaController.actualizar(iniciativa);
+                                    actividadActualizada = true;
+                                    break;
+                                }
+                            }
+                            if (actividadActualizada) {
+                                break;
+                            }
+                        }
+
+                        if (actividadActualizada) {
+                            VistaComun.mostrarMensaje("Estado de la actividad actualizado correctamente.");
+                        } else {
+                            VistaComun.mostrarMensaje("No se pudo actualizar el estado de la actividad.");
+                        }
+                    } catch (Exception e) {
+                        VistaComun.mostrarMensaje("Error al actualizar el estado: " + e.getMessage());
+                    }
+                }
+            } else {
+                VistaComun.mostrarMensaje("Actividad no encontrada o no estás asignado a ella.");
+            }
+        }
+    }
 }

@@ -46,13 +46,13 @@ public class Actividad {
      * @param fechaInicio La fecha de inicio de la actividad.
      * @param fechaFin La fecha de finalización de la actividad.
      */
-    public Actividad(String nombre, String descripcion, String fechaInicio, String fechaFin) {
+    public Actividad(String nombre, String descripcion, String fechaInicio, String fechaFin) throws FechaNoValidaException {
         this.nombre = nombre;
         this.descripcion = descripcion;
         setFechaInicio(fechaInicio);// Se valida en el setter
         setFechaFin(fechaFin); // Se valida en el setter
         this.estado = Estado.PENDIENTE;
-        this.comentario = comentario;
+        this.comentario = "Sin comentarios";
         this.Id = GeneradorID.generarID();
         this.voluntarios = new HashSet<>();
     }

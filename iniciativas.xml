@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Iniciativas>
     <iniciativa>
-        <id>ac4</id>
-        <nombre>dsfg</nombre>
-        <descripcion>adg</descripcion>
+        <id>b24</id>
+        <nombre>xxxx</nombre>
+        <descripcion>fddzg</descripcion>
         <creador>Fran Garcia</creador>
         <actividades>
             <actividad>
-                <id>063</id>
-                <nombre>seg</nombre>
-                <descripcion>seG</descripcion>
-                <fechaInicio>10/10/2025</fechaInicio>
-                <fechaFin>30/10/2025</fechaFin>
-                <estado>PENDIENTE</estado>
+                <id>9be</id>
+                <nombre>cvcvcvcv</nombre>
+                <descripcion>wsrfh</descripcion>
+                <fechaInicio>01/10/2025</fechaInicio>
+                <fechaFin>10/11/2025</fechaFin>
+                <estado>FINALIZADA</estado>
+                <comentario>xxxxx</comentario>
                 <voluntarios>
                     <voluntario>
                         <email>dani@gmail.com</email>
                         <nombre>Dani</nombre>
                         <password>$2a$10$lzEjiYOqFGTssyoSKcSN0e2J0.nGW/sYll6Ct.Ue8wAUyw6joErs6</password>
                         <nombreUsuario>dani</nombreUsuario>
-                        <puntosTotales>0</puntosTotales>
+                        <puntosTotales>100</puntosTotales>
                     </voluntario>
                 </voluntarios>
             </actividad>
