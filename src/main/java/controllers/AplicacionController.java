@@ -46,7 +46,7 @@ public class AplicacionController {
                         VistaComun.mostrarMensaje("Usuario no valido");
                     }
                     break;
-                case 2: // Registrarse
+                case 2: // RegistrarsE
                     registrarUsuario();
                     break;
                 case 0: // Salir
