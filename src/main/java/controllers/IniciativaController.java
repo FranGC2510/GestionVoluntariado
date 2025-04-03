@@ -11,10 +11,13 @@ import model.IniciativaLista;
 import java.util.ArrayList;
 import java.util.List;
 
-// Clase que implementa la gestion de iniciativas mediante operaciones CRUD
+/**
+ * Clase que implementa la gestion de iniciativas mediante operaciones CRUD
+ */
 public class IniciativaController implements Gestionable<Iniciativa> {
-
-    // Lista que almacena las iniciativas existentes
+    /**
+     * Lista que almacena las iniciativas existentes
+     */
     private IniciativaLista iniciativas;
 
     /**

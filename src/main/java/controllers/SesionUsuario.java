@@ -35,6 +35,11 @@ public class SesionUsuario {
     public Usuario getUsuarioActual() {
         return this.usuarioActual;
     }
+
+    /**
+     * Establece el usuario actual de la sesión.
+     * @param usuarioActual El usuario a establecer como actual, puede ser null
+     */
     public void setUsuarioActual(Usuario usuarioActual) {
         this.usuarioActual = usuarioActual;
     }

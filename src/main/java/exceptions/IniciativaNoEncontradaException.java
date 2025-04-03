@@ -5,10 +5,6 @@ package exceptions;
  */
 public class IniciativaNoEncontradaException extends RuntimeException {
 
-    /**
-     * Constructor de la excepción que recibe un mensaje descriptivo del error.
-     * @param message El mensaje que describe el error ocurrido.
-     */
     public IniciativaNoEncontradaException(String message) {
         super(message);
     }

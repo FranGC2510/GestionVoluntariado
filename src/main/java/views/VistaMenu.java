@@ -2,6 +2,16 @@ package views;
 
 import utils.UtilidadesGenerales;
 
+/**
+ * Clase que gestiona los diferentes menús y pantallas de navegación del sistema.
+ * Proporciona una interfaz de usuario estructurada para:
+ * - Navegación principal del sistema
+ * - Menús específicos para cada tipo de usuario
+ * - Gestión de iniciativas y actividades
+ *
+ * La clase utiliza elementos visuales como bordes, separadores y arte ASCII
+ * para mejorar la experiencia de usuario y hacer la navegación más intuitiva.
+ */
 public class VistaMenu {
     /**
      * Muestra la pantalla de bienvenida y permite al usuario seleccionar una opción.

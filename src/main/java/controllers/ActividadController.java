@@ -3,11 +3,9 @@ package controllers;
 import dataAccess.XMLManager;
 import exceptions.ActividadExisteException;
 import exceptions.ActividadNoEncontradaException;
-import exceptions.IniciativaNoEncontradaException;
 import interfaces.Gestionable;
 import model.Actividad;
 import model.ActividadLista;
-import model.Iniciativa;
 import model.Voluntario;
 
 import java.util.ArrayList;

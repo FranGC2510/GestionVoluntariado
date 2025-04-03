@@ -5,6 +5,17 @@ import model.Iniciativa;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase que gestiona la interfaz de usuario para las operaciones relacionadas con iniciativas.
+ * Proporciona funcionalidades para:
+ * - Crear y registrar nuevas iniciativas
+ * - Mostrar listados de iniciativas
+ * - Visualizar detalles de iniciativas específicas
+ * - Gestionar la entrada de datos del usuario
+ *
+ * Esta clase maneja toda la interacción con el usuario relacionada con iniciativas,
+ * asegurando una experiencia consistente y validaciones adecuadas.
+ */
 public class VistaIniciativa {
     private static final Scanner sc = new Scanner(System.in);
 

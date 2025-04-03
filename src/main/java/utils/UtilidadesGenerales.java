@@ -71,6 +71,17 @@ public class UtilidadesGenerales {
         return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
 
+    /**
+     * Valida si una fecha tiene el formato correcto (dd/mm/yyyy).
+     *
+     * El método verifica que la fecha cumpla con el siguiente formato:
+     * - Día: 01-31
+     * - Mes: 01-12
+     * - Año: 4 dígitos
+     *
+     * @param fecha La fecha a validar en formato String
+     * @return true si la fecha tiene un formato válido, false en caso contrario
+     */
     public static boolean validaFormatoFecha(String fecha){
         return fecha.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$");
     }

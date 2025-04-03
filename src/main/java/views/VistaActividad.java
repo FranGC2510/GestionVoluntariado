@@ -9,6 +9,16 @@ import utils.UtilidadesGenerales;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase que gestiona la interfaz de usuario para las operaciones relacionadas con actividades.
+ * Proporciona métodos para:
+ * - Registro y creación de nuevas actividades
+ * - Visualización de detalles de actividades
+ * - Gestión de estados de actividades
+ *
+ * Esta clase actúa como intermediaria entre el usuario y el sistema,
+ * asegurando que los datos introducidos sean válidos antes de procesarlos.
+ */
 public class VistaActividad {
     private static final Scanner sc = new Scanner(System.in);
 

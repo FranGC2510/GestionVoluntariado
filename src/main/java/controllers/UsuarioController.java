@@ -4,6 +4,11 @@ import dataAccess.XMLManager;
 import model.*;
 import utils.PasswordUtilidades;
 
+/**
+ * Controlador que gestiona todas las operaciones relacionadas con los usuarios del sistema.
+ * Esta clase maneja la autenticación, registro y actualización de usuarios, así como
+ * la persistencia de los datos en formato XML.
+ */
 public class UsuarioController {
     private UsuariosLista usuarios;
     /**

@@ -11,7 +11,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class IdsLista {
     /**
-     * Conjunto de iniciativas almacenados en la lista.
+     * Lista que almacena los identificadores únicos.
+     * Se utiliza un ArrayList para mantener el orden de inserción de los IDs.
+     * La anotación XmlElement permite la serialización correcta en el XML.
      */
     @XmlElement(name = "ids")
     private List<String> ids = new ArrayList<>();
@@ -22,8 +24,9 @@ public class IdsLista {
     public IdsLista() {}
 
     /**
-     * Obtiene la lista de iniciativas almacenados.
-     * @return Un conjunto de objetos de tipo {@link Iniciativa}
+     * Obtiene la lista de identificadores almacenados.
+     *
+     * @return Lista de identificadores almacenados
      */
     public List<String> getIds() {
         return ids;

@@ -74,6 +74,12 @@ public class XMLManager {
         return result;
     }
 
+    /**
+     * Verifica si existe un archivo XML con el nombre especificado.
+     *
+     * @param fileName Nombre del archivo XML a verificar
+     * @return true si el archivo existe, false en caso contrario
+     */
     private static boolean existeXML(String fileName) {
         boolean result = false;
         File file = new File(fileName);

@@ -1,6 +1,5 @@
 package controllers;
 
-import dataAccess.XMLManager;
 import exceptions.FechaNoValidaException;
 import interfaces.Estado;
 import model.*;
@@ -9,8 +8,10 @@ import views.*;
 import java.util.List;
 
 /**
- * Controlador principal de la aplicación.
- * Maneja el flujo principal del programa y la coordinación entre otros controladores.
+ * Controlador principal de la aplicación que coordina todas las operaciones del sistema.
+ * Actúa como punto central de control entre las vistas y los demás controladores,
+ * gestionando el flujo de la aplicación, la autenticación de usuarios y las operaciones
+ * específicas para cada tipo de usuario (Creador y Voluntario).
  */
 public class AplicacionController {
     private IniciativaController iniciativaController;
@@ -18,6 +19,10 @@ public class AplicacionController {
     private UsuarioController usuarioController;
     private Usuario usuarioActual;
 
+    /**
+     * Controlador principal de la aplicación.
+     * Maneja el flujo principal del programa y la coordinación entre otros controladores.
+     */
     public AplicacionController() {
         this.iniciativaController = new IniciativaController();
         this.actividadController = new ActividadController();
@@ -26,7 +31,11 @@ public class AplicacionController {
     }
 
     /**
-     * Inicia la ejecución de la aplicación.
+     * Inicia la ejecución de la aplicación y gestiona el flujo principal del programa.
+     * Muestra el menú principal y maneja las opciones de:
+     * - Inicio de sesión (diferenciando entre Creador y Voluntario)
+     * - Registro de nuevos usuarios
+     * - Salida del sistema
      */
     public void iniciar() {
         boolean ejecutar = true;
@@ -58,7 +67,11 @@ public class AplicacionController {
     }
 
     /**
-     * Gestiona el proceso de registro de un nuevo usuario.
+     * Gestiona el proceso de registro de un nuevo usuario en el sistema.
+     * Permite registrar tanto Creadores como Voluntarios, solicitando los datos
+     * necesarios según el tipo de usuario seleccionado. Tras un registro exitoso,
+     * inicia automáticamente la sesión del nuevo usuario y lo dirige al menú
+     * correspondiente a su rol.
      */
     private void registrarUsuario() {
         int tipoUsuario = VistaMenu.tipoRegistro();
@@ -77,6 +90,11 @@ public class AplicacionController {
 
     /**
      * Gestiona el menú principal del creador de iniciativas.
+     * Proporciona acceso a las operaciones específicas del rol Creador:
+     * - Crear nuevas iniciativas
+     * - Ver listado de todas las iniciativas
+     * - Ver detalles de una iniciativa específica
+     * - Cerrar sesión
      */
     private void gestionarMenuCreador() {
         boolean continuar = true;
@@ -104,7 +122,10 @@ public class AplicacionController {
     }
 
     /**
-     * Gestiona la vista detallada de una iniciativa y sus operaciones.
+     * Gestiona la vista detallada de una iniciativa y sus operaciones asociadas.
+     * Permite al usuario buscar una iniciativa por su ID y, si existe,
+     * muestra sus detalles y permite realizar operaciones sobre ella.
+     * Si la iniciativa no se encuentra, muestra un mensaje de error.
      */
     private void gestionarVistaDetalleIniciativa() {
         String id = VistaIniciativa.pideIdIniciativa();
@@ -168,9 +189,14 @@ public class AplicacionController {
     }
 
     /**
-     * Gestiona el menú principal del voluntario.
-     * Muestra las opciones disponibles para el voluntario y procesa sus selecciones,
-     * incluyendo ver actividades disponibles, ver actividades asignadas y cerrar sesión.
+     * Gestiona el menú principal del voluntario y sus operaciones disponibles.
+     * Proporciona acceso a las funcionalidades específicas del rol Voluntario:
+     * - Ver actividades disponibles para participar
+     * - Ver actividades asignadas al voluntario
+     * - Actualizar el estado de sus actividades
+     * - Cerrar sesión
+     *
+     * El menú se mantiene activo hasta que el voluntario decide cerrar sesión.
      */
     private void gestionarMenuVoluntario() {
         boolean continuar = true;
@@ -237,6 +263,15 @@ public class AplicacionController {
         }
     }
 
+    /**
+     * Gestiona el proceso de asignación de un voluntario a una actividad.
+     * Permite al voluntario unirse a una actividad específica si:
+     * - La actividad existe
+     * - El voluntario no está ya asignado a ella
+     * - La actividad está en estado PENDIENTE o EN_CURSO
+     *
+     * @param iniciativas Lista de iniciativas disponibles en el sistema
+     */
     private void asignarActividad(List<Iniciativa> iniciativas) {
         String idActividad = VistaActividad.pideIdActividad("\n¿Desea asignarse a alguna actividad? Introduzca el ID de la actividad (o 0 para cancelar):");
         if (!idActividad.equals("0")) {
@@ -273,9 +308,14 @@ public class AplicacionController {
     }
 
     /**
-     * Muestra las actividades a las que está asignado el voluntario actual.
-     * Recorre todas las iniciativas y muestra aquellas actividades donde el voluntario
-     * actual está participando, incluyendo su estado y otros detalles relevantes.
+     * Muestra y gestiona las actividades asignadas al voluntario actual.
+     * Funcionalidades:
+     * - Lista todas las actividades donde el voluntario está participando
+     * - Muestra el estado actual de cada actividad
+     * - Permite modificar el estado de las actividades
+     * - Gestiona la finalización de actividades y la asignación de puntos
+     *
+     * Si el voluntario no tiene actividades asignadas, muestra un mensaje informativo.
      */
     private void actividadesAsignadas() {
         List<Iniciativa> iniciativas = iniciativaController.listar();
@@ -305,13 +345,26 @@ public class AplicacionController {
             VistaComun.mostrarMensaje("No hay iniciativas registradas.");
         }
     }
+
+    /**
+     * Permite a un voluntario modificar el estado de una actividad en la que participa.
+     * Funcionalidades:
+     * - Validación de pertenencia del voluntario a la actividad
+     * - Actualización del estado de la actividad
+     * - Gestión especial para actividades FINALIZADAS:
+     *   - Solicitud de comentario de finalización
+     *   - Asignación de 100 puntos a todos los voluntarios participantes
+     * - Persistencia de los cambios en el sistema
+     *
+     * @param iniciativas Lista de iniciativas donde buscar la actividad a modificar
+     */
     private void modificarEstadoActividad(List<Iniciativa> iniciativas) {
         String idActividad = VistaActividad.pideIdActividad("\n¿Desea modificar el estado de alguna actividad? Introduzca el ID (o 0 para cancelar):");
         if (!idActividad.equals("0")) {
             Actividad actividad = actividadController.buscarPorId(idActividad);
             Voluntario voluntario = (Voluntario) SesionUsuario.getInstance().getUsuarioActual();
 
-            if (actividad != null && actividad.getVoluntarios().contains(voluntario)) {
+            if (actividad != null && actividad.getVoluntarios().contains(voluntario) && !actividad.getEstado().equals(Estado.FINALIZADA)) {
                 Estado nuevoEstado = VistaActividad.pideEstado();
                 if (nuevoEstado != null) {
                     boolean actividadActualizada = false;
@@ -352,7 +405,7 @@ public class AplicacionController {
                     }
                 }
             } else {
-                VistaComun.mostrarMensaje("Actividad no encontrada o no estás asignado a ella.");
+                VistaComun.mostrarMensaje("El estado de la actividad no se puede modificar.");
             }
         }
     }

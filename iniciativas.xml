@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Iniciativas/>
+<Iniciativas>
+    <iniciativa>
+        <id>2db</id>
+        <nombre>Reforestar</nombre>
+        <descripcion>dkb</descripcion>
+        <creador>Fran Garcia</creador>
+        <actividades>
+            <actividad>
+                <id>19e</id>
+                <nombre>Bosques</nombre>
+                <descripcion>asf</descripcion>
+                <fechaInicio>03/04/2025</fechaInicio>
+                <fechaFin>10/05/2025</fechaFin>
+                <estado>FINALIZADA</estado>
+                <comentario>hgcjh</comentario>
+                <voluntarios>
+                    <voluntario>
+                        <email>dani@gmail.com</email>
+                        <nombre>Dani</nombre>
+                        <password>$2a$10$lzEjiYOqFGTssyoSKcSN0e2J0.nGW/sYll6Ct.Ue8wAUyw6joErs6</password>
+                        <nombreUsuario>dani</nombreUsuario>
+                        <puntosTotales>200</puntosTotales>
+                    </voluntario>
+                </voluntarios>
+            </actividad>
+        </actividades>
+    </iniciativa>
+</Iniciativas>
