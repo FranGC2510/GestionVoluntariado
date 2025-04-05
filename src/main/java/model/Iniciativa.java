@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Representa una iniciativa con un identificador único, nombre, descripción,
- * un creador y una lista de voluntarios asociados.
+ * un creador y una lista de actividades asociados.
  * Se utiliza JAXB para la serialización en XML.
  */
 @XmlRootElement(name="iniciativa")
